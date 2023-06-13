@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap CDN Start -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- font Awesome CDN start -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- cropper CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+
+    <link rel="shortcut icon" href="images/kapra logo.webp" type="image/x-icon">
+    <link rel="stylesheet" href="../Css/style.css">
+    <title>Kapra Collection 2.0</title>
+</head>
+
+<body>
+    <div class="container">
+
+    </div>
+    <!-- Header Start -->
+
+    <div class="Header container-fluid bg_secondary shadow">
+        <nav class="navbar navbar-expand-lg navbar-light bg_secondary">
+            <div class="container d-flex justify-content-between align-items-ceneter">
+                <a class="navbar-brand" href="../index.html"><img src="../images/kapra logo.webp" height="50px"
+                        alt=""></a>
+                <button class="navbar-toggler Nav_bar_reset_Toggle" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/Shop.html">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Contact</a>
+                        </li>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/try.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link position-relative" href=""><strong>Cart</strong>&nbsp;<i
+                                    class="fa-solid fa-cart-arrow-down"></i><sup
+                                    class="Cart_Count d-flex justify-content-center align-items-center">0</sup></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href=""><i class="fa-solid fa-user" style="color: #455974;"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Header End -->
+
+    <!-- section 1 start  -->
+
+
+    <div class="container-fluid">
+        <div class="container-xxl my-5 d-flex justify flex-column gap-4">
+            <div class="row">
+                <div class="container Search col-12 border w-75 rounded-pill border-secondary bg-white">
+                    <input class="form-control rounded-pill border-0 me-2 d-inline-block input_reset"
+                        style="width:calc(100% - 35px);" type="search" placeholder="Search">
+                    <span><i class="fa-solid fa-magnifying-glass fs-5 text-muted"></i></span>
+                </div>
+
+            </div>
+            <div class="row filters">
+                <div class="container">
+                    <div class="">
+                        <div class="container">
+                            <div class="btn  btn-primary Our_btn">filters &#8628;</div>
+                            <div class="container border border-secondary my-2 hide">
+                                <div class="Price_range_filer_wrapper">
+                                    <header>
+                                        <h2>Price Range</h2>
+                                        <p>Use slider or enter min and max price</p>
+                                    </header>
+                                    <div class="price-input">
+                                        <div class="field">
+                                            <span>Min</span>
+                                            <input type="number" class="input-min" value="2500">
+                                        </div>
+                                        <div class="separator"></div>
+                                        <div class="field">
+                                            <span>Max</span>
+                                            <input type="number" class="input-max" value="7500">
+                                        </div>
+                                    </div>
+                                    <div class="slider">
+                                        <div class="progress"></div>
+                                    </div>
+                                    <div class="range-input">
+                                        <input type="range" class="range-min" min="0" max="10000" value="2500"
+                                            step="100">
+                                        <input type="range" class="range-max" min="0" max="10000" value="7500"
+                                            step="100">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        <h2 class="my-5 text-center">All Collection</h2>
+        <div class="row d-flex flex-wrap justify-content-center align-items-center">
+
+
+            <div class="col-3 p-2 width-18-rem" >
+                <div class="card w-100 Product_card">
+                    <img class="" style="object-fit: cover; height: 200px; width: 100%;" src="data:image/jpeg;base64,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" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center justify-content-between my-2"> <h5 class="card-title d-inline-block m-0">Card title</h5><div class="tag bg-dark text-white px-2 py-1 rounded d-inline-block me-3">#021</div></div>
+                      <p class="card-text text-secondary">Some quick example text sunt!to build on the card title and make up the bulk of the card's content.</p>
+                      <div class="text-secondary Card_tag_box"><span>brand</span><span>Card-tag-box</span><span>Card-tag-box</span><span>Card-tag-box</span><span>Card-tag-box</span></div>
+                    </div>
+                    <div class="w-100 h-100 mx-3">
+                        <div class="text-white "><span class="Discounted_price fw-bold text-decoration-line-through text-secondary">Rs : 200</span> <strong class="bg-dark d-inline px-3 py-2 rounded">Rs : <span class="Product_price">20000</span></strong></div>
+                    </div>
+                  </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    <!-- section 1 end  -->
+
+    <!-- footer Start -->
+
+    <div class="container-fluid bg-dark mt-5">
+        <div class="container-xxl text-white">
+            <div class="row w-100 p-3">
+                <div class="col-md-4 col-sm-12 p-2 d-flex flex-column justify-content-between">
+                    <ul>
+                        <h1 class="fs-1">Links</h1>
+                        <li class="my-3 marker"><a class="text-decoration-none text-white" href="#">Home</a></li>
+                        <li class="my-3 marker"><a class="text-decoration-none text-white" href="#">Shop</a></li>
+                        <li class="my-3 marker"><a class="text-decoration-none text-white" href="#">About</a></li>
+                        <li class="my-3 marker"><a class="text-decoration-none text-white" href="#">Account</a></li>
+                        <li class="my-3 marker"><a class="text-decoration-none text-white" href="#">Contact Us</a></li>
+                    </ul>
+
+                    <ul class="d-flex flex-wrap gap-4">
+                        <li class="marker"><a class="text-white" href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        </li>
+                        <li class="marker"><a class="text-white" href="#"><i class="fa-brands fa-instagram"></i></a>
+                        </li>
+                        <li class="marker"><a class="text-white" href="#"><i class="fa-brands fa-google"></i></a></li>
+                        <li class="marker"><a class="text-white" href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
+                        <li class="marker"><a class="text-white" href="#"><i class="fa-brands fa-youtube"></i></a></li>
+                    </ul>
+
+                </div>
+                <div class="col-md-4 col-sm-12"></div>
+                <div class="col-md-4 col-sm-12">
+                    <h2 class="text-center ">FeedBack</h2>
+                    <input type="text" class="rounded-pill outline_none w-100 border-0 my-2 p-2 px-3 fs-6"
+                        placeholder="Enter Your Name">
+                    <input type="text" class="rounded-pill outline_none w-100 border-0 my-2 p-2 px-3 fs-6"
+                        placeholder="Enter Your Email">
+                    <textarea name="" id="" class="w-100 my-2 outline_none p-2 px-3 fs-6 border-radius-10px" rows="5"
+                        placeholder="Any Message"></textarea>
+                    <div class="btnbox text-end row">
+
+                        <p class="col-6 text-start"> Give Your FeedBack </p>
+                        <div class="col-6 text-end">
+                            <button class="Our_Custom_btn btn btn-primary">Submit</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row border-top mt-2 p-3">
+                <div class="col-12 copy_rigth_box">
+                    <div class="">Copyright &copy; 2023 Kapra Collection. Powered by Kapra Collection.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- footer end  -->
+
+
+
+
+
+    <!-- bootstrap scripts start -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+
+    <!-- bootstrap scripts end -->
+
+    <!-- My scripts start -->
+
+    <script src="js/Shop.js" type="module"></script>
+
+    <!-- My scripts end -->
+</body>
+
+</html>
