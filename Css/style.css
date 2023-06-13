@@ -163,6 +163,12 @@ html ::-webkit-scrollbar{
     box-shadow: none !important;
 }
 
+.object_fit_cover{
+object-fit: cover;
+object-position: center;
+}
+
+
 /* add Card  Modal start */
 /* add Card  Modal End */
 
@@ -297,3 +303,47 @@ html ::-webkit-scrollbar{
 }
 
 /* media Qurys end */
+
+
+
+
+
+
+/* big card css start */
+.big_card_slider_img{position: relative;}
+.big_card_slider_img .open_full_screen{
+opacity: 0.3;} 
+.big_card_igm_slider .open_full_screen{
+
+  content: '';
+  /* display: none; */
+  background: #0000005f;
+  background-image: url('https://www.iconsdb.com/icons/preview/white/search-15-xl.png');
+  background-position: 100%;
+  /* background-origin:; */
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  /* opacity: 0.5; */
+
+}
+.big_card_igm_slider .open_full_screen  i {
+ position: absolute;
+ font-size: 1.5rem;
+  right: 10px;
+  top: 10px;
+  padding: 10px;
+  color: #000;
+  border-radius: 50%;
+  background: #fff;
+
+}
+
+.Big_card_details .card_id_no{
+  background: #212529;
+  color: #fff;
+}
+
+
+/* big card css end */
