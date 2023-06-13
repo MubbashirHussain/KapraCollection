@@ -17,16 +17,14 @@
     <title>Kapra Collection 2.0</title>
 </head>
 <body>
-    <div class="container">
 
-    </div>
     <!-- Header Start -->
 
     <div class="Header container-fluid bg_secondary shadow">
         <nav class="navbar navbar-expand-lg navbar-light bg_secondary">
           <div class="container d-flex justify-content-between align-items-ceneter">
             <a class="navbar-brand" href="index.html"><img src="images/kapra logo.webp" height="50px" alt=""></a>
-            <button class="navbar-toggler Nav_bar_reset_Toggle" type="button" data-bs-toggle="collapse"
+            <button class="navbar-toggler Nav_bar_reset_Toggle input_reset" type="button" data-bs-toggle="collapse"
               data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
               aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -47,10 +45,10 @@
                   <a class="nav-link" href="pages/big_card.html">About</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link position-relative" href="" ><strong>Cart</strong>&nbsp;<i class="fa-solid fa-cart-arrow-down"></i><sup class="Cart_Count d-flex justify-content-center align-items-center">0</sup></a>
+                  <a class="nav-link position-relative CART_BTN" ><strong>Cart</strong>&nbsp;<i class="fa-solid fa-cart-arrow-down"></i><sup class="Cart_Count d-flex justify-content-center align-items-center">0</sup></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href=""><i class="fa-solid fa-user" style="color: #455974;"></i></a>
+                  <a class="nav-link" href=""><i class="fa-solid fa-arrow-right-to-bracket fa-fade"></i></a>
                 </li>
               </ul>
             </div>
@@ -233,8 +231,8 @@
     <div class="container-fluid bg-dark mt-5">
       <div class="container-xxl text-white">
         <div class="row w-100 p-3">
-          <div class="col-md-4 col-sm-12 p-2 d-flex flex-column justify-content-between" >
-            <ul>
+          <div class="col-md-4 Quick_link col-sm-12 p-2 d-flex flex-column justify-content-between" >
+            <ul class="">
               <h1 class="fs-1 m-0">Quick Links</h1>
               <li class="my-3 marker" ><a class="text-decoration-none text-white" href="#">Home</a></li>
               <li class="my-3 marker" ><a class="text-decoration-none text-white" href="#">Shop</a></li>
@@ -244,11 +242,11 @@
             </ul>
 
             <ul class="d-flex flex-wrap gap-4">
-            <li class="marker" ><a class="text-white" href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-            <li class="marker" ><a class="text-white" href="#"><i class="fa-brands fa-instagram"></i></a></li>
-            <li class="marker" ><a class="text-white" href="#"><i class="fa-brands fa-google"></i></a></li>
-            <li class="marker" ><a class="text-white" href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
-            <li class="marker" ><a class="text-white" href="#"><i class="fa-brands fa-youtube"></i></a></li>
+            <li class="marker" ><a class="text-white text-decoration-none" href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li class="marker" ><a class="text-white text-decoration-none" href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            <li class="marker" ><a class="text-white text-decoration-none" href="#"><i class="fa-brands fa-google"></i></a></li>
+            <li class="marker" ><a class="text-white text-decoration-none" href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
+            <li class="marker" ><a class="text-white text-decoration-none" href="#"><i class="fa-brands fa-youtube"></i></a></li>
           </ul>
 
           </div>
@@ -296,6 +294,7 @@
 <!-- My scripts start -->
 
     <script src="js/app.js" type="module"></script>
+    <script src="js/header.js" type="module"></script>
 
 <!-- My scripts end -->
 </body>
