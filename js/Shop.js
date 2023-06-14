@@ -65,22 +65,90 @@ rangeInput.forEach(input =>{
 
 
 
-// Creating Cards start 
-
-const FETCH_data = async () =>{
-    console.log("feting")
-    await fetch('https://dl.dropboxusercontent.com/s/2k3ntz30plxu0zy/card_data_for_kapra_col.json?dl=0')
-    .then(res => res.json() )
-    .then(ress => CreatngCards(ress))
-    .catch(er => console.log(er))
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+import { getDatabase  ,ref ,onValue} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+    const firebaseConfig = {
+          apiKey: "AIzaSyA4nH4_anE2tXfuKc3SQsecAMfCQEGyjsU",
+          authDomain: "kapra-collection.firebaseapp.com",
+          databaseURL: "https://kapra-collection-default-rtdb.firebaseio.com",
+          projectId: "kapra-collection",
+          storageBucket: "kapra-collection.appspot.com",
+          messagingSenderId: "1079091462046",
+          appId: "1:1079091462046:web:0222b69aa20ed0defa608f",
+          measurementId: "G-M5TZZ9CFDT"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase();
+        const starCountRef = ref(db, 'Products/');
+        onValue(starCountRef, (snapshot) => {
+        // console.log(snapshot.val());
+        Card_Crating(snapshot.val())
+        });
     
+        
+const Product_card_container = document.querySelector('.Product_card_container')
+        
+
+
+const Card_Crating = (data) =>{
+    console.log(data)
+    data.forEach(card => {
+        // console.log(card.Card_title)
+        let colum  = document.createElement('div')
+        colum.className = "col-3 p-2 width-18-rem"
+        colum.innerHTML =`
+        <div class="card w-100 Product_card">
+        <img class="" style="object-fit: cover; height: 200px; width: 100%;" src="${card.Card_preivew_img}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between my-2"> <h5 class="card-title d-inline-block m-0">${card.Card_title}</h5><div class="tag bg-dark text-white px-2 py-1 rounded d-inline-block me-3">#${card.Card_id_no}</div></div>
+          <p class="card-text text-secondary">Some quick example text sunt!to build on the card title and make up the bulk of the card's content.</p>
+          <div class="text-secondary Card_tag_box">${card.Card_Tags}</div>
+        </div>
+        <div class="w-100 h-100 mx-3">
+            <div class="text-white "><span class="Discounted_price fw-bold text-decoration-line-through text-secondary">${card.Card_Discounted_price}</span> <strong class="bg-dark d-inline px-3 py-2 rounded">Rs : <span class="Product_price">${card.Card_Price}</span></strong></div>
+        </div>
+      </div>`
+
+        colum.addEventListener("click",(e)=>{
+            // console.log(e.target)
+            Open_big_card(card)
+            
+        })
+      Product_card_container.append(colum)
+    });
 }
-window.onload = FETCH_data()
-const CreatngCards = (data)=>{
-console.log(data)
+
+
+
+
+ const Open_big_card = (card) =>{
+    window.location.pathname = "pages/card.html"
+    let daa = []
+    daa.push(card)
+    console.log(daa)
+    localStorage.setItem("card" ,JSON.stringify(daa))
 }
 
-// CreatngCards(data)
 
 
-// Creating Cards end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

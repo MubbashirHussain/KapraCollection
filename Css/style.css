@@ -83,6 +83,7 @@ html::-webkit-scrollbar{
 
 .Product_card{
     height: 450px !important;
+    cursor: pointer;
 }
 .Product_card .card-text{
     text-overflow: ellipsis ;
@@ -317,7 +318,8 @@ object-position: center;
 /* big card css start */
 .big_card_slider_img{position: relative;}
 .big_card_slider_img .open_full_screen{
-opacity: 0.3;} 
+  display: none;
+opacity: 0.3;}
 .big_card_igm_slider .open_full_screen{
 
   content: '';
@@ -327,6 +329,7 @@ opacity: 0.3;}
   background-position: 100%;
   /* background-origin:; */
   position: absolute;
+  display: none;  /*                             ===============================================                   */
   height: 100%;
   width: 100%;
   z-index: 2;
