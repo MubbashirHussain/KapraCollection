@@ -11,15 +11,9 @@ priceInput = Price_range_filer_wrapper.querySelectorAll(".price-input input"),
 range = Price_range_filer_wrapper.querySelector(".slider .progress");
 
 const filterBtn =  document.querySelector('.filters .Our_btn')
-console.log(filterBtn)
 filterBtn.onclick =()=>{
     Price_range_filer_wrapper.parentElement.classList.toggle('hide')
 }
-
-
-console.log(Price_range_filer_wrapper)
-
-
 priceInput.forEach(input =>{
     input.addEventListener("input", e =>{
         let minPrice = parseInt(priceInput[0].value); Price_range[0] =  priceInput[0].value
@@ -96,31 +90,42 @@ const Product_card_container = document.querySelector('.Product_card_container')
 
 
 const Card_Crating = (data) =>{
-    console.log(data)
-    data.forEach(card => {
-        // console.log(card.Card_title)
+for (const i in data) {    
+    // console.log(card.Card_title)
         let colum  = document.createElement('div')
         colum.className = "col-3 p-2 width-18-rem"
         colum.innerHTML =`
         <div class="card w-100 Product_card">
-        <img class="" style="object-fit: cover; height: 200px; width: 100%;" src="${card.Card_preivew_img}" class="card-img-top" alt="...">
+        <img class="" style="object-fit: cover; height: 200px; width: 100%;" src="${data[i].Card_preivew_img}" class="card-img-top" alt="...">
         <div class="card-body">
-          <div class="d-flex align-items-center justify-content-between my-2"> <h5 class="card-title d-inline-block m-0">${card.Card_title}</h5><div class="tag bg-dark text-white px-2 py-1 rounded d-inline-block me-3">#${card.Card_id_no}</div></div>
+          <div class="d-flex align-items-center justify-content-between my-2"> <h5 class="card-title d-inline-block m-0">${data[i].Card_title}</h5><div class="tag bg-dark text-white px-2 py-1 rounded d-inline-block me-3">#${data[i].Card_id_no}</div></div>
           <p class="card-text text-secondary">Some quick example text sunt!to build on the card title and make up the bulk of the card's content.</p>
-          <div class="text-secondary Card_tag_box">${card.Card_Tags}</div>
+          <div class="text-secondary Card_tag_box"></div>
         </div>
         <div class="w-100 h-100 mx-3">
-            <div class="text-white "><span class="Discounted_price fw-bold text-decoration-line-through text-secondary">${card.Card_Discounted_price}</span> <strong class="bg-dark d-inline px-3 py-2 rounded">Rs : <span class="Product_price">${card.Card_Price}</span></strong></div>
+            <div class="text-white "><span class="Discounted_price fw-bold text-decoration-line-through text-secondary">${data[i].Card_Discounted_price}</span> <strong class="bg-dark d-inline px-3 py-2 rounded">Rs : <span class="Product_price">${data[i].Card_Price}</span></strong></div>
         </div>
       </div>`
+      let Discounted_price = colum.querySelector('.Discounted_price')
+      if(data[i].Card_Discounted_price > 1){
+        Discounted_price.innerText = `Rs : ${data[i].Card_Discounted_price}`;
+      }
+      let Card_tag_box = colum.querySelector('.Card_tag_box')
+      if(data[i].Card_Tags != undefined){
+          for (let j = 0; j < data[i].Card_Tags.length; j++) {
+              let Tagspan  = document.createElement('span')
+              Tagspan.innerHTML = `${data[i].Card_Tags[j]}`
+              Card_tag_box.appendChild(Tagspan)
+          }
+      }
 
         colum.addEventListener("click",(e)=>{
             // console.log(e.target)
-            Open_big_card(card)
+            Open_big_card(data[i])
             
         })
       Product_card_container.append(colum)
-    });
+    }
 }
 
 
