@@ -53,7 +53,7 @@ const cart_itme_create = () => {
         <div class="img"><img src="${Cart_item[i].Card_preivew_img}"></div>
 
         <div class="Card_details w-100">
-          <div class=" fw-bold d-flex justify-content-between"> ${Cart_item[i].Card_title} <span class="mx-auto"> ${Cart_item[i].Card_id_no}</span></div>
+          <div class=" fw-bold d-flex justify-content-between"> ${Cart_item[i].Card_title} <span class="mx-auto"> #${Cart_item[i].Card_id_no}</span></div>
           <div class="">Rs ${Cart_item[i].Card_Price} <span class="Product_quantity text-muted ms-2">x${Cart_item[i].quantity}</span></div>
         </div>
 
