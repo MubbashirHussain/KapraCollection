@@ -113,23 +113,8 @@ const printing_main_Card = (card) => {
     document.querySelector('.Cart_Count').innerText = JSON.parse(localStorage.getItem("cart_items")).length
 
   }
-
-
-
-
-
-
-
-
-
-
-
 }
 printing_main_Card(data_from)
-
-// console.log()
-// console.log(anywaladata)
-
 
 
 
