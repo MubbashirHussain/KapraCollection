@@ -42,7 +42,15 @@ html ::-webkit-scrollbar{
 .width-18-rem{
     width: 20.5rem;
 }
+.Bg-img::before{
+  content: '';
+height: 100%;
+position: absolute;
+background: linear-gradient(30deg, rgba(11, 1, 185, 0.158) 0%, rgba(228, 129, 0, 0.171) 68%);
+width: 100%;
+}
 .Bg-img{
+  position: relative;
     background-color:transparent;
     background: linear-gradient(6deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 68%);
     background-size:cover;
@@ -89,6 +97,7 @@ html ::-webkit-scrollbar{
     cursor: pointer;
 }
 .Product_card .card-text{
+    overflow: hidden;
     text-overflow: ellipsis ;
     width: 100%;
     height: 70px;
@@ -105,7 +114,7 @@ html ::-webkit-scrollbar{
     height: 100%;
     z-index: 5;
 }
-.main_card_editer_Modal{
+.main_card_editer{
     position:absolute;
     top: 50%;
     left: 50%;
@@ -124,10 +133,9 @@ html ::-webkit-scrollbar{
 }
 
 .img-preview{overflow: hidden;}
-.main_card_editer_Modal .Drop_box{
+.main_card_editer .Drop_box{
     border: 1px dashed;
     height: 200px;
-    width: 90%;
 }
 
 .input_reset:focus{
@@ -143,10 +151,10 @@ html ::-webkit-scrollbar{
 
 }
 
-.main_card_editer_Modal input{
-    border: 1px solid #a8a8a8d2;
+.main_card_editer input{
+    /* border: 1px solid #a8a8a8d2;
     outline: transparent;
-    display: block;
+    display: block; */
 }
 .img_croping_area{
     height: inherit !important;
@@ -158,16 +166,19 @@ html ::-webkit-scrollbar{
 }
 .Card_Edit_container{
     min-height: 350px !important;
-    width: 60%;
+    /* width: 60%; */
  /* min-width: 30px; */
 }
 .Card_preview_container{
     border: 1px var(--border_color) solid;
-    width: 40%;
-    min-width:350px;
+    /* width: 40%; */
+    /* min-width:350px; */
 }
 .btn:focus{
     box-shadow: none !important;
+}
+.overflow-hidden{
+  overflow: hidden;
 }
 
 .object_fit_cover{
@@ -496,7 +507,7 @@ form > div {
 margin: .7em 0;
 text-align: left;
 }
-input, textarea {
+.writing input, .writing textarea {
 background: transparent;
 border: 0;
 outline: 0;
@@ -550,7 +561,7 @@ transition: width .5s ease;
 .writing :is(input , textarea):focus ~ span:before {width: 100%;}
 .textarea textarea {
 overflow: auto;
-min-height: calc(0em + 20px);
+min-height: calc(1em + 20px);
 height: 1.2em;
 overflow: hidden;
 resize: none;
@@ -559,3 +570,78 @@ resize: none;
 
 
 /* login Signup end */
+
+
+
+
+/* pagination css start */
+
+
+.pagination_box ul{
+  width: fit-content;
+  /* width: 50vw; */
+  display: flex ;
+  flex-wrap: wrap ;
+  background: #fff;
+  font-size: 100%;
+  padding: 5px;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.055);
+}
+
+
+.pagination_box ul li{
+  color: #212529;
+  list-style: none;
+  line-height: 45px;
+  text-align: center;
+  /* font-size: 14px; */
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+.pagination_box ul li.numb{
+  list-style: none;
+  height: 45px;
+  aspect-ratio: 1;
+  margin: 0 3px;
+  /* line-height: 45px; */
+  border-radius: 50%;
+}
+.pagination_box ul li.numb.first{
+  margin: 0px 3px 0 -5px;
+}
+.pagination_box ul li.numb.last{
+  margin: 0px -5px 0 3px;
+}
+.pagination_box ul li.dots{
+  /* font-size: 22px; */
+  cursor: default;
+}
+.pagination_box ul li.btn{
+  padding: 0 20px;
+  /* border-radius: 50px; */
+}
+.pagination_box li.active,
+.pagination_box ul li.numb:hover,
+.pagination_box ul li:first-child:hover,
+.pagination_box ul li:last-child:hover{
+  color: #fff;
+  background: #212529;
+}
+.meriClass{display: none;}
+
+
+/* pagination css end */
+
+
+
+
+/* cart page css start */
+
+.cart_Table td{
+  vertical-align: middle;
+}
+
+
+/* cart page css end */

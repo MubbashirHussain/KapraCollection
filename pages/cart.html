@@ -30,8 +30,7 @@
     <div class="Header container-fluid bg_secondary shadow">
         <nav class="navbar navbar-expand-lg navbar-light bg_secondary">
             <div class="container d-flex justify-content-between align-items-ceneter">
-                <a class="navbar-brand" href="../index.html"><img src="../images/kapra logo.webp" height="50px"
-                        alt=""></a>
+                <a class="navbar-brand" href="index.html"><img src="images/kapra logo.webp" height="50px" alt=""></a>
                 <button class="navbar-toggler Nav_bar_reset_Toggle" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +39,7 @@
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="pages/Shop.html">Shop</a>
@@ -50,10 +49,10 @@
                         </li>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="try.html">About</a>
+                            <a class="nav-link" href="pages/try.html">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link position-relative CART_BTN" href=""><strong>Cart</strong>&nbsp;<i
+                            <a class="nav-link position-relative" href=""><strong>Cart</strong>&nbsp;<i
                                     class="fa-solid fa-cart-arrow-down"></i><sup
                                     class="Cart_Count d-flex justify-content-center align-items-center">0</sup></a>
                         </li>
@@ -71,39 +70,94 @@
     <!-- section 1 start  -->
 
 
-    <div class="container-fluid">
-        <div class="container-xxl my-5 d-flex justify flex-column gap-4">
-            <div class="row">
-                <div class="container Search col-12 border w-75 rounded-pill border-secondary bg-white">
-                    <input class="form-control rounded-pill border-0 me-2 d-inline-block input_reset SearchInput"
-                        style="width:calc(100% - 35px);" type="search"  name="search" placeholder="Search">
-                    <span><i class="fa-solid fa-magnifying-glass fs-5 text-muted"></i></span>
+
+
+
+
+<div class="container-xxl cart_main_container">
+<h1 class="text-center text-secondary my-5">Cart</h1>
+    <div class="container my-2">
+        <div class="row">
+            <div class="col-12">
+                <table id="Data_table" class="cart_Table table table-striped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>product</td>
+                            <td>Price</td>
+                            <td>Quantity</td>
+                            <td>subtotal</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>X</td>
+                            <td>img</td>
+                            <td>product</td>
+                            <td>Price</td>
+                            <td>Quantity</td>
+                            <td>subtotal</td>
+                        </tr>
+                    </tbody>
+                    <tfoot class="table-dark">
+                        <tr>
+
+                            <td colspan="5"><input type="text" placeholder="Counpon Code"
+                                    class="p-1 input_reset rounded mx-2 my-2 "> <button class="btn-primary btn">Apply
+                                    Coupon</button></td>
+                            <td class="text-end"><button class="btn btn-primary me-3">Update Cart</button></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+        <div class="row my-5 py-5">
+            <div class="col-md-6 col-sm-12">
+                <div class="container p-5 align-middle">
+                  <p class="my-0">Don't be stranger!</p>
+                  <h1 class="">Thank you for shopping with us </h1>
+                  <p class="">Thanks so much for your order! I hope you enjoy your new purchase!</p>
+                </div>
+          
+              </div>            <div class="col-md-6 col-sm-12 border bg-light">
+                <div class="row bg-white p-3">
+                    <h2>Cart total</h2>
+                </div>
+                <div class="row p-3" border-top>
+                    <div class="col-5">Subtottal</div>
+                    <div class="col-7 Cart_sub_total">Rs 12,000 </div>
+                </div>
+                <div class=" row  p-3 border-top">
+                    <div class="col-5">Shipping</div>
+                    <div class="col-7">Free Shipping<br>Free Shipping for <strong>shindh</strong>.</div>
+                </div>
+                <div class=" row  p-3 border-top">
+                    <div class="col-5">Total</div>
+                    <div class="col-7 Cart_total">12,000</div>
+                </div>
+                <div class=" row  p-3 border-top">
+                    <div class="col-12"><button class="btn btn-primary w-100 py-2">CHECOUT</button></div>
                 </div>
 
             </div>
-                <!-- filter coming soon ...  -->
+
         </div>
+    </div>
     </div>
 
 
 
-    <div class="container">
-        <h2 class="my-5 text-center">All Collection</h2>
-        <div class="row d-flex flex-wrap justify-content-center align-items-center Product_card_container">
-        </div>
-        <div class="py-3 px-5">
-            <div class="pagination_box">
-                <ul>
-                </ul>
-            </div>
-        </div>
-    </div>
+
+
+
+
 
 
     <!-- section 1 end  -->
 
     <!-- footer Start -->
-    
 
     <div class="container-fluid bg-dark mt-5">
         <div class="container-xxl text-white">
@@ -157,7 +211,6 @@
     </div>
 
 
-
     <!-- footer end  -->
 
 
@@ -177,15 +230,8 @@
 
     <!-- My scripts start -->
 
-    <script src="../js/Shop.js" type="module"></script>
+    <script src="../js/cart-page.js" type="module"></script>
     <script src="../js/header.js" type="module"></script>
-    <!-- <script src="../js/firebase.js" type="module"></script> -->
-
-
-
-
-
-
 
     <!-- My scripts end -->
 </body>

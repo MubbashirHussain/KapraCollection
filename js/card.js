@@ -95,11 +95,10 @@ const printing_main_Card = (card) => {
           flag = true;
         }
       }
-      console.log(flag)
+      // console.log(flag)
       if (flag) {
         Cart_data = LS_item
         Cart_data.push(card)
-        console.log("if pass")
         localStorage.setItem("cart_items", JSON.stringify(Cart_data))
       }
 
