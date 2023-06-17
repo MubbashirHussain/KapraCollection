@@ -1,6 +1,10 @@
-import { auth ,signInWithEmailAndPassword ,createUserWithEmailAndPassword } from "../js/firebase.js";
+import { auth ,signInWithEmailAndPassword ,onAuthStateChanged,createUserWithEmailAndPassword } from "../js/firebase.js";
 
-
+let AuthState = onAuthStateChanged(auth ,(user)=>{
+    if(user){
+      window.location.pathname = "index.html"
+    }
+})
 
 document.querySelectorAll('.writing :is(input , textarea)').forEach(writinginput => {
     writinginput.addEventListener('input', () => {

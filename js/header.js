@@ -1,3 +1,6 @@
+import { auth, onAuthStateChanged, db, dbRef, dbset, onValue ,signOut} from "../js/firebase.js";
+
+
 var CART_BTN = document.querySelector('.CART_BTN')
 let Cart_Count = CART_BTN.querySelector('.Cart_Count')
 let cart_side_bar = document.createElement('div')
@@ -36,6 +39,21 @@ cart_side_bar.innerHTML = `
 
   </div>`
 
+let login_logout_btn = document.querySelector('.login_logout_btn')
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    login_logout_btn.href = ''
+    login_logout_btn.querySelector('i').style.transform = "rotate(180deg)"
+    login_logout_btn.addEventListener("click", () => {
+      signOut(auth).then((sec) => {
+        window.reload()
+      })
+    })
+  }else{
+    login_logout_btn.querySelector('i').style.transform = "rotate(0deg)"
+    login_logout_btn.href = 'pages/user-login.html'
+  }
+})
 
 let Cart_box = cart_side_bar.querySelector('.Cart_box')
 let Cart_item;
