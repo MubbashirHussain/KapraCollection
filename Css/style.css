@@ -357,9 +357,16 @@ opacity: 0.3;}
   color: #000;
   border-radius: 50%;
   background: #fff;
-
 }
-
+.modal > div > div:hover{ 
+  box-shadow: 0 0 2px 2px #00ff00c0;
+  transition: 0.5s;
+  
+}
+.Featured_Products .AllCards > div > div:hover{ 
+  box-shadow: 0 0 2px 2px #ff0000c0;
+  transition: 0.5s;
+}
 .Big_card_details .card_id_no{
   background: #212529;
   color: #fff;
@@ -368,7 +375,21 @@ opacity: 0.3;}
 
 /* big card css end */
 
-
+.modal{
+  display: flex;
+  width: 80%;
+  position: absolute;
+  height: 90vh;
+  overflow: hidden;
+  overflow-y: scroll;
+  background: #fff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  flex-wrap: wrap;
+  border-radius: 15px;
+  justify-content: center;
+}
 
 
 /* cart side bar css start*/

@@ -1,7 +1,7 @@
 import { auth, signInWithEmailAndPassword, onAuthStateChanged, db, dbRef, dbset, sendPasswordResetEmail, onValue } from "../js/firebase.js";
 let flag = false;
-let Dref = dbRef(db, 'Admin/')
 
+let Dref = dbRef(db, 'Admin/')
 onValue(Dref, (snap) => {
   let data = Object.values(snap.val())
   checkingAdmin(data)
@@ -68,16 +68,17 @@ const Page_container = document.querySelector('.Page_container'),
 
 window.checkingAdmin = (data) => {
   window.Admin_login = () => {
+    console.log(data)
     for (let i = 0; i < data.length; i++) {
-      if (data[i].Admin_email != Email_input.value) {
-        Error_Box.innerHTML = "Only admins can Login From here"
-        return
+      if (data[i].Admin_email == Email_input.value) {
+        flag = true;
       }
     }
-    signInWithEmailAndPassword(auth, Email_input.value, Password_input.value)
+    console.log(flag)
+    if(flag){
+      signInWithEmailAndPassword(auth, Email_input.value, Password_input.value)
       .then((AdimData) => {
         let data = AdimData.user
-
         Error_Box.style.color = '#0cb164'
         Error_Box.innerHTML = 'Yes You are admin'
 
@@ -85,7 +86,9 @@ window.checkingAdmin = (data) => {
         let errorMessage = err.message;
         // console.log(err)
         Error_Box.innerHTML = errorMessage;
-      })
+      })}else{
+        Error_Box.innerHTML = "Only admins can Login From here"
+      }
   }
 }
 forget_password.onclick = () => {

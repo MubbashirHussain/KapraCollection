@@ -52,8 +52,8 @@ const printing_main_Card = (card) => {
         Discounted_price.innerText = `Rs : ${card.Card_Discounted_price}`;
         Discounted_price.style.padding = "0 12px" 
       }
+      
   let Card_tag_box = card_area.querySelector('.Card_tag_box')
-
   if(card.Card_Tags != undefined){
     for (let j = 0; j < card.Card_Tags.length; j++) {
         let Tagspan  = document.createElement('span')

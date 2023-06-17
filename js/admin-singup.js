@@ -13,7 +13,6 @@ window.checkforAdminpage = (data, Logger) => {
   if (Logger != undefined) {
     for (let i = 0; i < data.length; i++) {
       if (data[i].Admin_uid == Logger.uid) {
-        window.location.pathname = "pages/admin-sign-up.html"
 
       }
     }
@@ -23,7 +22,7 @@ window.checkforAdminpage = (data, Logger) => {
       if (user) {
         checkforAdminpage(data, user)
       }else{
-        window.location.pathname = "pages/admin-login.html"
+        // window.location.pathname = "pages/admin-login.html"
       }
     })
 
@@ -62,7 +61,7 @@ const Page_container = document.querySelector('.Page_container'),
 
 window.Admin_signup = () => {
 
-    console.log(Email_input.value, Password_input.value)
+    // console.log(Email_input.value, Password_input.value)
 
     createUserWithEmailAndPassword(auth, Email_input.value, Password_input.value)
         .then((userData) => {
@@ -72,6 +71,7 @@ window.Admin_signup = () => {
                 Admin_uid: data.uid,
                 Admin_email: data.email,
             })
+            alert("New Admin was Created")
         }).catch((err) => {
             let errorMessage = err.message.message;
             Error_Box.innerHTML = errorMessage;

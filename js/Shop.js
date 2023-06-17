@@ -91,7 +91,16 @@ const Rendering_card = (Data_for_Render) => {
               </div>
             </div>
            </div>
-           `;
+           `
+           let Card_tag_box = Product_card_container.querySelectorAll('.Card_tag_box')
+           if(Data_for_Render[pageIndex][i].Card_Tags != undefined){
+             for (let j = 0; j < Data_for_Render[pageIndex][i].Card_Tags.length; j++) {
+                 let Tagspan  = document.createElement('span')
+                 Tagspan.innerHTML = `${Data_for_Render[pageIndex][i].Card_Tags[j]}`
+                 console.log(Tagspan)
+                 Card_tag_box[i].appendChild(Tagspan)
+             }
+         }
         let allCard = Product_card_container.querySelectorAll('.card_parent')
         allCard.forEach(elm => {
             elm.addEventListener("click", () => {

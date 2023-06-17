@@ -51,7 +51,9 @@ onAuthStateChanged(auth, (user) => {
     })
   }else{
     login_logout_btn.querySelector('i').style.transform = "rotate(0deg)"
-    login_logout_btn.href = 'pages/user-login.html'
+    login_logout_btn.onclick=()=>{
+      window.location.pathname = 'pages/user-login.html'
+    }
   }
 })
 
