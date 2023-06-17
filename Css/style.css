@@ -645,3 +645,79 @@ resize: none;
 
 
 /* cart page css end */
+
+
+/* Admin page css start  */
+
+.Admin_sidebar_ul {
+
+/* width: 100% !important; */
+
+}
+
+
+@media (width > 991px) { /* mid window */
+
+  .Custom_Side_bar{
+    height: 100vh !important;
+    width: 30% !important;
+  }
+.Custom_Side_bar nav > div{
+  display: flex !important;
+  flex-direction: column;
+align-items: flex-start !important;
+margin: 0 !important;
+padding: 0 !important;
+  /* justify-content: flex-start !important; */
+}
+.Custom_Side_bar nav > div >div ul{
+  display: flex;
+  flex-direction: column !important;
+  justify-content: start !important;
+}
+
+
+.Admin_sidebar_ul li{
+  width: calc( 100% + 30px) !important;
+  list-style: none;
+  text-align: left  !important;
+  margin: 10px 15px 12px 0 !important;
+  padding: 10px 0 !important ;
+}
+.Admin_sidebar_ul li .active{
+  background: #027fb9 !important;
+  color: #fff !important;
+}
+.Admin_sidebar_ul li a{
+  border-radius:  0 30px 30px 0 !important;
+  text-decoration: none;
+  transition: 0.5s;
+  color: white;
+}
+}
+@media  (width < 992px) { /* small window */
+
+  .Custom_Side_bar{
+    /* height: 100% !important; */
+    width: 100% !important;
+  }
+.Custom_Side_bar nav > div{
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  /* justify-content: flex-start !important; */
+}
+.Custom_Side_bar nav > div >div ul{
+  display: flex;
+  flex-direction: column !important;
+  justify-content: start !important;
+  align-items: flex-start;
+}
+
+}
+
+
+
+/* Admin page css end */
+
+

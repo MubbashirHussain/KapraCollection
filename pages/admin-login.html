@@ -28,47 +28,26 @@
 
         </div>
         <div class="loginSignup_page row m-0">
-            <button class="page_change btn"><i class="fa-solid fa-circle-arrow-right shadow rounded-circle "></i></button>
-            <form action="" class=" Login_page active p-2 py-5">
+            <div class="col-md-6 col-sm-12 Login_page active p-2 py-5">
                 <h2 class="text-center">Login</h2>
                 <div class="text writing">
-                    <input type="text" id="nombre" name="nombre" required>
-                    <label for="nombre">Email</label>
+                    <input type="text" id="Email" required>
+                    <label for="Email">Email</label>
                     <span></span>
                 </div>
                 <div class="text writing">
-                    <input type="text" id="nombre" name="nombre" required>
-                    <label for="nombre">Password</label>
+                    <input type="password" id="Password" required>
+                    <label for="Password">Password</label>
                     <span></span>
                 </div>
                 <div class="text writing">
-                    <div class="text-decoration-underline" style="font-size: 0.8rem;">forgett passort</div>
-                    <div class="errorBox text-danger text-center my-3" style="font-size: 0.8rem"> Email is Invalid please Enter Right Email </div>
+                    <div class="text-decoration-underline mt-2 forget_password" style="font-size: 0.8rem;cursor: pointer;">forget password</div>
+                    <div class="errorBox  text-center my-3" style="font-size: 0.8rem ; color: #dc3545;">  </div>
                 </div>
                 <div class="text writing">
-                    <button class="btn text-white bg-dark py-2">Login</button>
+                    <button class="btn text-white bg-dark py-2" onclick="Admin_login()">Login</button>
                 </div>
-            </form>
-            <form action="" class="Signup_page" >
-                <h2 class="text-center">Sign Up</h2>
-                <div class="text writing">
-                    <input type="text" id="nombre" name="nombre" required>
-                    <label for="nombre">Email</label>
-                    <span></span>
-                </div>
-                <div class="text writing">
-                    <input type="text" id="nombre" name="nombre" required>
-                    <label for="nombre">Password</label>
-                    <span></span>
-                </div>
-                <div class="text writing">
-                    <div class="" style="font-size: 0.8rem;"> &nbsp; </div>
-                    <div class="errorBox text-danger text-center my-3" style="font-size: 0.8rem"> Email is Invalid please Enter Right Email </div>
-                </div>
-                <div class="text writing">
-                    <button class="btn text-white bg-dark py-2">Sign Up</button>
-                </div>
-            </form>
+            </div>
         </div>
 
 
@@ -105,7 +84,7 @@
 
 <!-- My scripts start -->
 
-    <script src="../js/login.js" type="module"></script>
+    <script src="../js/admin-login.js" type="module"></script>
 
 <!-- My scripts end -->
 </body>

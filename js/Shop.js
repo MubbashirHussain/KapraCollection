@@ -1,25 +1,6 @@
-// filer Function Coming soon ... 
+import { db , dbRef ,onValue} from "../js/firebase.js";
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-const firebaseConfig = {
-    apiKey: "AIzaSyA4nH4_anE2tXfuKc3SQsecAMfCQEGyjsU",
-    authDomain: "kapra-collection.firebaseapp.com",
-    databaseURL: "https://kapra-collection-default-rtdb.firebaseio.com",
-    projectId: "kapra-collection",
-    storageBucket: "kapra-collection.appspot.com",
-    messagingSenderId: "1079091462046",
-    appId: "1:1079091462046:web:0222b69aa20ed0defa608f",
-    measurementId: "G-M5TZZ9CFDT"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getDatabase();
-const starCountRef = ref(db, 'Products/');
+const starCountRef = dbRef(db, 'Products/');
 onValue(starCountRef, (snapshot) => {
     Card_Crating(snapshot.val())
 });
