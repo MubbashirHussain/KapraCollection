@@ -32,13 +32,18 @@ cart_side_bar.innerHTML = `
     </div>
     <div class="row px-3 py-3 d-flex flex-column border-top">
       <div class="d-flex flex-column gap-3">
-        <button class="btn btn-primary"> View Cart  </button>
+        <button class="btn btn-primary" onclick="VeiwCart()"> Veiw Cart</button>
         <button class="btn btn-primary">  Checkout Cart  </button>
       </div>
     </div>
 
   </div>`
 
+  window.VeiwCart = ()=>{
+    if(JSON.parse(localStorage.getItem('cart_items')).length > 0){
+      window.location.pathname ="pages/cart.html"
+    }
+  }
 let login_logout_btn = document.querySelector('.login_logout_btn')
 onAuthStateChanged(auth, (user) => {
   if (user) {

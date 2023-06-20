@@ -358,13 +358,22 @@ opacity: 0.3;}
   border-radius: 50%;
   background: #fff;
 }
-.modal > div > div:hover{ 
+.modal > .card_parent > div:hover{ 
   box-shadow: 0 0 2px 2px #00ff00c0;
+  transition: 0.5s;
+  
+}
+.modal > .Detete_card > div:hover{ 
+  box-shadow: 0 0 2px 2px #ff0000c0;
   transition: 0.5s;
   
 }
 .Featured_Products .AllCards > div > div:hover{ 
   box-shadow: 0 0 2px 2px #ff0000c0;
+  transition: 0.5s;
+}
+.Edit_card_container .AllCards > div > div:hover{ 
+  box-shadow: 0 0 2px 2px #00aeffc0;
   transition: 0.5s;
 }
 .Big_card_details .card_id_no{
@@ -416,7 +425,7 @@ opacity: 0.3;}
 .close_side_bar_anim{
   width:0;
 }
-.cart_card .delete_btn:hover{
+.delete_btn:hover{
   color: #000 !important;
   transition: 0.5s;
   cursor: pointer;

@@ -70,33 +70,33 @@
         <div class="row p-4">
             <div class="col-md-7 col-ms-12 bg-light">
                 <h2 class="border-bottom py-3">Billing details</h2>
-                <form action="" class="Order_details w-100">
+                <div class="Order_details w-100">
                     <div class="d-flex gap-3 justify-content-between w-100">
                         <div class="d-flex flex-column w-50 p-1 gap-2">
                             <label for="first-name">First Name</label>
-                            <input type="text" name="" class="input_reset border p-2" id="first-name">
+                            <input required type="text" name="" class="input_reset border p-2" id="first-name">
                         </div>
                         <div class="d-flex flex-column w-50 p-1 gap-2">
                             <label for="last-name">Last Name</label>
-                            <input type="text" name="" class="input_reset border p-2" id="last-name">
+                            <input required type="text" name="" class="input_reset border p-2" id="last-name">
                         </div>
 
                     </div>
                     <div class="d-flex flex-column w-100 p-1 gap-2">
                         <label for="Country">Country / Region</label>
-                        <input type="text" name="" class="input_reset border p-2" id="Country">
+                        <input required type="text" name="" class="input_reset border p-2" id="Country">
                     </div>
                     <div class="d-flex flex-column w-100 p-1 gap-2">
                         <label for="Street">Street address</label>
-                        <input type="text" name="" class="input_reset border p-2" id="Street">
+                        <input required type="text" name="" class="input_reset border p-2" id="Street">
                     </div>
                     <div class="d-flex flex-column w-100 p-1 gap-2">
                         <label for="Town-City">Town / City</label>
-                        <input type="text" name="" class="input_reset border p-2" id="Town-City">
+                        <input required type="text" name="" class="input_reset border p-2" id="Town-City">
                     </div>
                     <div class="d-flex flex-column w-100 p-1 gap-2">
                         <label for="state">State</label>
-                        <input type="text" name="" class="input_reset border p-2" id="state">
+                        <input required type="text" name="" class="input_reset border p-2" id="state">
                     </div>
                     <div class="d-flex flex-column w-100 p-1 gap-2">
                         <label for="Post-code">Post code</label>
@@ -104,37 +104,36 @@
                     </div>
                     <div class="d-flex flex-column w-100 p-1 gap-2">
                         <label for="Email-address">Email</label>
-                        <input type="email" name="" class="input_reset border p-2" id="Email-address">
+                        <input required type="email" name="" class="input_reset border p-2" id="Email-address">
                     </div>
                     <div class="d-flex flex-column w-100 p-1 gap-2">
                         <label for="first-name">First Name</label>
-                        <input type="text" name="" class="input_reset border p-2" id="first-name">
+                        <input required type="text" name="" class="input_reset border p-2" id="first-name">
                     </div>
                     <div class="d-flex flex-column w-100 p-1 gap-2">
                         <label for="order-note">Order Notes (optional)</label>
                         <textarea type="text" name="" class="input_reset border p-2" id="order-note"></textarea>
                     </div>
-                </form>
+                </div>
             </div>
-            <div class="col-md-5 col-sm-12 d-flex flex-column justify-content-center align-items-center">
-              <div class="border bg-light w-100 overflow-hidden row m-0">
+            <div class="col-md-5 col-sm-12 d-flex flex-column justify-content-center align-items-center Cart_details_box">
+              <div class="border bg-light w-100 overflow-hidden row m-0 Cart_details_box_inner">
                 <div class="row m-0 py-2 p-4 bg-white"><h2>Your Order</h2></div>
                 <div class="row m-0 px-4 py-3 border-top"><div class="d-flex justify-content-between"><h5>product</h5><h5>Subtotal</h5></div></div>
-                <div class="row m-0 px-4 py-3 border-top"><div class="d-flex justify-content-between"><div class="Check_products">Product Name </div><div class="Check_price">11000</div></div></div>
-                <div class="row m-0 px-4 py-3 border-top"><div class="d-flex justify-content-between"><div class="Check_products">Product Name </div><div class="Check_price">11000</div></div></div>
-                <div class="row m-0 px-4 py-3 border-top"><div class="d-flex justify-content-between"><div class="">Subtotal </div><div class="Check_Subtotal">24000</div></div></div>
-                <div class="row m-0 px-4 py-3 border-top"><div class="d-flex justify-content-between"><div class="">shipping </div><div class="">Free Shipping</div></div></div>
-                <div class="row m-0 px-4 py-3 border-top"><div class="d-flex justify-content-between"><div class="">Total </div><div class="Check_total">24000</div></div></div>
+                <!-- <div class="row m-0 px-4 py-3 border-top"><div class="d-flex justify-content-between"><div class="Check_products">Product Name </div><div class="Check_price"></div></div></div> -->
+                <div class="row m-0 px-4 py-3 border-top"><div class="d-flex justify-content-between"><div class="">Subtotal </div><div class="Check_Subtotal_products"></div></div></div>
+                <div class="row m-0 px-4 py-3 border-top"><div class="d-flex justify-content-between"><div class="">shipping </div><div class="show_cart_details">Free Shipping</div></div></div>
+                <div class="row m-0 px-4 py-3 border-top"><div class="d-flex justify-content-between"><div class="">Total </div><div class="Check_total"></div></div></div>
               </div>
               <div class="border bg-light w-100 overflow-hidden row m-0">
                 <div class="row m-0 py-2 p-4  text-center mt-5"><h2>Payment Methord</h2></div>
                 <div class="row m-0 px-4 py-3  ">
                   <div class="">
-                    <input type="radio" name="Payment-m" id="Bank-Transfer"> <label for="Bank-Transfer">Direct bank Transfer</label>
+                    <input required type="radio" name="Payment-m" value="Bank-Transfer"  id="Bank-Transfer"> <label for="Bank-Transfer">Direct bank Transfer</label>
                     <p class="Notes-BT border p-3 mt-2 bg-white">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
                   </div>
                   <div class="">
-                    <input type="radio" name="Payment-m" id="COD"> <label for="COD">Cash on Delivery</label>
+                    <input required type="radio" name="Payment-m" value="COD" id="COD"> <label for="COD">Cash on Delivery</label>
                     <p class="Notes-COD border p-3 mt-2 bg-white">Pay with cash upon delivery.</p>
                   </div>
                 </div>
@@ -187,9 +186,9 @@
           <div class="col-md-4 col-sm-12"></div>
           <div class="col-md-4 col-sm-12">
             <h2 class="text-center ">FeedBack</h2>
-            <input type="text" class="rounded-pill outline_none w-100 border-0 my-2 p-2 px-3 fs-6"
+            <input required type="text" class="rounded-pill outline_none w-100 border-0 my-2 p-2 px-3 fs-6"
               placeholder="Enter Your Name">
-            <input type="text" class="rounded-pill outline_none w-100 border-0 my-2 p-2 px-3 fs-6"
+            <input required type="text" class="rounded-pill outline_none w-100 border-0 my-2 p-2 px-3 fs-6"
               placeholder="Enter Your Email">
             <textarea name="" id="" class="w-100 my-2 outline_none p-2 px-3 fs-6 border-radius-10px" rows="5"
               placeholder="Any Message"></textarea>
@@ -227,7 +226,7 @@
 
 <!-- My scripts start -->
 
-    <script src="js/app.js" type="module"></script>
+    <script src="../js/checkout.js" type="module"></script>
 
 <!-- My scripts end -->
 </body>

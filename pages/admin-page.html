@@ -76,13 +76,13 @@
 
                 <div class="w-100 h-100 bg-light admin_dashborad hide">
                     <div class="row d-flex justify-content-center align-items-center" style="height:10%;">
-                        <h1 class="text-center py-4 border-bottom">Dashboard</h1>
+                        <h1 class="text-center py-2 border-bottom">Dashboard</h1>
                     </div>
                     <div class="row " style="height: 90%;">
-
+                        <div class="col-12 mx-5 my-1 DeshBorad w-100" style="width: fit-content;"></div>
                     </div>
                 </div>
-                <div class="w-100 h-100 bg-light  admin_Home">
+                <div class="w-100 h-100 bg-light  admin_Home hide">
                     <div class="row d-flex justify-content-center align-items-center " style="height:10%;">
                         <h1 class="text-center py-2 border-bottom">Home page</h1>
                     </div>
@@ -93,18 +93,23 @@
                             </div>
                             <div class="row m-0 " style="width: calc(100% - 100px);">
                                 <div class="col-12 mx-5 my-1 Featured_Products w-100" style="width: fit-content;">
-                                    <p class="bg-white px-2 py-3">double click on Card to <span class="text-success fw-bold">Add</span> and <span class="text-danger fw-bold">Remove</span> Card as Featured Products</p>
-                                    <div class="AllCards d-flex flex-wrap justify-content-center" style="overflow-y: scroll; height: 50vh;">
+                                    <p class="bg-white px-2 py-3">double click on Card to <span
+                                            class="text-success fw-bold">Add</span> and <span
+                                            class="text-danger fw-bold">Remove</span> Card as Featured Products</p>
+                                    <div class="AllCards d-flex flex-wrap justify-content-center"
+                                        style="overflow-y: scroll; height: 50vh;">
                                         loading ...
                                     </div>
                                     <div class=" my-3 d-flex justify-content-between gap-1 align-items-center"
                                         style="height: fit-content;">
                                         <p class="Show_error hide border p-3 bg-white rounded text-danger"> please
                                             delete any one to add more </p>
-                                        <p class="border px-3 py-4 bg-white rounded" style="width: fit-content;">You can
-                                            add Only <span class="text-success fw-bold">6</span> Cards to Show on Home
+                                        <p class="border px-3 py-4 bg-white rounded" style="width: fit-content;">You
+                                            can
+                                            add Only <span class="text-success fw-bold">6</span> Cards to Show on
+                                            Home
                                             page as <span class="text-success fw-bold">Featured Products</span></p>
-                                                <div class=" h-100 me-5 AddFeatured_btn "><button
+                                        <div class=" h-100 me-5 AddFeatured_btn "><button
                                                 class="btn p-3 btn-primary">Add New Featured Card</button></div>
                                     </div>
                                 </div>
@@ -112,25 +117,46 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-100 h-100 bg-light hide admin_Shop">
-                    <div class="row d-flex justify-content-center align-items-center style=" height:10%;">
-                        <h1 class="text-center py-4 border-bottom">Shop page</h1>
+                <div class="w-100 h-100 bg-light admin_Shop">
+                    <div class="row d-flex justify-content-center align-items-center" style=" height:10%;">
+                        <h1 class="text-center py-2 border-bottom">Shop page</h1>
                     </div>
                     <div class="row " style="height: 90%;">
-
+                        <div class="m-0 p-0 ">
+                            <div class="row m-0 ">
+                                <h3 class="pt-3 px-5">Featured Products</h3>
+                            </div>
+                            <div class="row m-0 " style="width: calc(100% - 100px);">
+                                <div class="col-12 mx-5 my-1 Edit_card_container w-100" style="width: fit-content;">
+                                    <p class="bg-white px-2 py-3">double click on Card to <span
+                                            class="text-success fw-bold">Edit</span> Card Shown on Shop page </p>
+                                    <div class="AllCards d-flex flex-wrap justify-content-center"
+                                        style="overflow-y: scroll; height: 50vh;">
+                                        loading ...
+                                    </div>
+                                    <div class=" my-3 d-flex justify-content-between gap-1 align-items-center"
+                                        style="height: fit-content;">
+                                        <p class="Show_error hide border p-3 bg-white rounded text-danger"> please
+                                            delete any one to add more </p>
+                                        <div class="h-100 me-5 ADD_NEW_CARD_BTN"><button class="btn p-3 btn-primary">Add New Card</button></div>
+                                        <div class="h-100 me-5 DELETE_BTN"><button class="btn p-3 btn-primary bg-danger border-danger">Delete Cards</button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="w-100 h-100 bg-light hide admin_Signup">
-                    <div class="row d-flex justify-content-center align-items-center style=" height:10%;">
-                        <h1 class="text-center py-4 border-bottom">Admin Signup page</h1>
+                    <div class="row d-flex justify-content-center align-items-center" style=" height:10%;">
+                        <h1 class="text-center py-2 border-bottom">Admin Signup page</h1>
                     </div>
                     <div class="row " style="height: 90%;">
                         <iframe src="../pages/admin-sign-up.html" class="w-100 h-100 border-0"></iframe>
                     </div>
                 </div>
                 <div class="w-100 h-100 bg-light hide admin_preview">
-                    <div class="row d-flex justify-content-center align-items-center style=" height:10%;">
-                        <h1 class="text-center py-4 border-bottom">Preview</h1>
+                    <div class="row d-flex justify-content-center align-items-center" style=" height:10%;">
+                        <h1 class="text-center py-2 border-bottom">Preview</h1>
                     </div>
                     <div class="row " style="height: 90%;">
                         <iframe src="../index.html" class="w-100 h-100 border-0"></iframe>
@@ -174,6 +200,7 @@
     <!-- My scripts start -->
 
     <script src="../js/admin-page.js" type="module"></script>
+    <script src="../js/add_cards.js" type="module"></script>
 
     <!-- My scripts end -->
 </body>

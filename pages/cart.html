@@ -16,22 +16,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
 
-    <link rel="shortcut icon" href="images/kapra logo.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="../images/kapra logo.webp" type="image/x-icon">
     <link rel="stylesheet" href="../Css/style.css">
     <title>Kapra Collection 2.0</title>
 </head>
 
 <body>
-    <!-- <div class="container">
-
-    </div> -->
     <!-- Header Start -->
 
     <div class="Header container-fluid bg_secondary shadow">
         <nav class="navbar navbar-expand-lg navbar-light bg_secondary">
             <div class="container d-flex justify-content-between align-items-ceneter">
-                <a class="navbar-brand" href="index.html"><img src="images/kapra logo.webp" height="50px" alt=""></a>
-                <button class="navbar-toggler Nav_bar_reset_Toggle" type="button" data-bs-toggle="collapse"
+                <a class="navbar-brand" href="index.html"><img src="../images/kapra logo.webp" height="50px" alt=""></a>
+                <button class="navbar-toggler Nav_bar_reset_Toggle input_reset" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -45,25 +42,27 @@
                             <a class="nav-link" href="pages/Shop.html">Shop</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Contact</a>
+                            <a class="nav-link" href="pages/contactus.html">Contact</a>
                         </li>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="pages/try.html">About</a>
+                            <a class="nav-link" href="pages/about.html">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link position-relative" href=""><strong>Cart</strong>&nbsp;<i
+                            <a class="nav-link position-relative CART_BTN"><strong>Cart</strong>&nbsp;<i
                                     class="fa-solid fa-cart-arrow-down"></i><sup
                                     class="Cart_Count d-flex justify-content-center align-items-center">0</sup></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href=""><i class="fa-solid fa-user" style="color: #455974;"></i></a>
+                            <a class="nav-link login_logout_btn" href="pages/user-login.html"><i
+                                    class="fa-solid fa-arrow-right-to-bracket fa-fade"></i></a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </div>
+
 
     <!-- Header End -->
 
@@ -74,77 +73,48 @@
 
 
 
-<div class="container-xxl cart_main_container">
-<h1 class="text-center text-secondary my-5">Cart</h1>
-    <div class="container my-2">
-        <div class="row">
-            <div class="col-12">
-                <table id="Data_table" class="cart_Table table table-striped table-bordered">
-                    <thead class="table-dark">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>product</td>
-                            <td>Price</td>
-                            <td>Quantity</td>
-                            <td>subtotal</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>X</td>
-                            <td>img</td>
-                            <td>product</td>
-                            <td>Price</td>
-                            <td>Quantity</td>
-                            <td>subtotal</td>
-                        </tr>
-                    </tbody>
-                    <tfoot class="table-dark">
-                        <tr>
+    <div class="container-xxl cart_main_container">
+        <h1 class="text-center text-secondary my-5">Cart</h1>
+        <div class="container my-2">
+            <div class="row">
+                <div class="col-12">
+                    <table id="Data_table" class="cart_Table table table-striped table-bordered"></table>
 
-                            <td colspan="5"><input type="text" placeholder="Counpon Code"
-                                    class="p-1 input_reset rounded mx-2 my-2 "> <button class="btn-primary btn">Apply
-                                    Coupon</button></td>
-                            <td class="text-end"><button class="btn btn-primary me-3">Update Cart</button></td>
-                        </tr>
-                    </tfoot>
-                </table>
+                </div>
+            </div>
+            <div class="row my-5 py-5">
+                <div class="col-md-6 col-sm-12">
+                    <div class="container p-5 align-middle">
+                        <p class="my-0">Don't be stranger!</p>
+                        <h1 class="">Thank you for shopping with us </h1>
+                        <p class="">Thanks so much for your order! I hope you enjoy your new purchase!</p>
+                    </div>
+
+                </div>
+                <div class="col-md-6 col-sm-12 border bg-light cart_tottal_box">
+                    <div class="row bg-white p-3">
+                        <h2>Cart total</h2>
+                    </div>
+                    <div class="row p-3" border-top>
+                        <div class="col-5">Subtotal</div>
+                        <div class="col-7 Cart_sub_total">Rs <span>0</span></div>
+                    </div>
+                    <div class=" row  p-3 border-top">
+                        <div class="col-5">Shipping</div>
+                        <div class="col-7">Free Shipping for <strong>shindh</strong>.</div>
+                    </div>
+                    <div class=" row  p-3 border-top">
+                        <div class="col-5">Total</div>
+                        <div class="col-7 Cart_total">0</div>
+                    </div>
+                    <div class=" row  p-3 border-top">
+                        <div class="col-12"><button class="btn btn-primary w-100 py-2 CHECOUT_btn">CHECOUT</button></div>
+                    </div>
+
+                </div>
 
             </div>
         </div>
-        <div class="row my-5 py-5">
-            <div class="col-md-6 col-sm-12">
-                <div class="container p-5 align-middle">
-                  <p class="my-0">Don't be stranger!</p>
-                  <h1 class="">Thank you for shopping with us </h1>
-                  <p class="">Thanks so much for your order! I hope you enjoy your new purchase!</p>
-                </div>
-          
-              </div>            <div class="col-md-6 col-sm-12 border bg-light">
-                <div class="row bg-white p-3">
-                    <h2>Cart total</h2>
-                </div>
-                <div class="row p-3" border-top>
-                    <div class="col-5">Subtottal</div>
-                    <div class="col-7 Cart_sub_total">Rs 12,000 </div>
-                </div>
-                <div class=" row  p-3 border-top">
-                    <div class="col-5">Shipping</div>
-                    <div class="col-7">Free Shipping<br>Free Shipping for <strong>shindh</strong>.</div>
-                </div>
-                <div class=" row  p-3 border-top">
-                    <div class="col-5">Total</div>
-                    <div class="col-7 Cart_total">12,000</div>
-                </div>
-                <div class=" row  p-3 border-top">
-                    <div class="col-12"><button class="btn btn-primary w-100 py-2">CHECOUT</button></div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
     </div>
 
 

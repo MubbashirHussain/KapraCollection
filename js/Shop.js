@@ -21,7 +21,6 @@ const Card_Crating = (data) => {
     SearchInput.disabled = false
 
     let data_divid_for_paging = (AaraData, retara) => {
-        // console.log(AaraData.)
         for (let i = 0; i < AaraData.length; i += 15) {
             let DP = AaraData.slice(i, i + 15);
             retara.push(DP);
@@ -44,8 +43,6 @@ const Card_Crating = (data) => {
         data_for_render = [];
         emtpyAara = [];
         Product_card_container.innerHTML = "";
-        console.log(data_for_search)
-        console.log(data_for_search.length)
         for (let i = 0; i < data_for_search.length; i++) {
             for (let j = 0; j < data_for_search[i].length; j++) {
                 let card_name = data_for_search[i][j].Card_title.toUpperCase().split(" ").join("").split(".").join("");
@@ -97,7 +94,6 @@ const Rendering_card = (Data_for_Render) => {
              for (let j = 0; j < Data_for_Render[pageIndex][i].Card_Tags.length; j++) {
                  let Tagspan  = document.createElement('span')
                  Tagspan.innerHTML = `${Data_for_Render[pageIndex][i].Card_Tags[j]}`
-                 console.log(Tagspan)
                  Card_tag_box[i].appendChild(Tagspan)
              }
          }
@@ -202,7 +198,6 @@ window.Open_big_card = (card) => {
     window.location.pathname = "pages/card.html"
     let daa = []
     daa.push(card)
-    console.log(daa)
     localStorage.setItem("card", JSON.stringify(daa))
 }
 

@@ -1,72 +1,91 @@
-let Obj;
-export const Create_main_card_editer_Modal = () => {
-    Create_modal_bg()
+
+
+
+const Create_main_card_editer_Modal = () => {
+    let modal_bg = document.createElement("div")
+    modal_bg.classList.add("modal_bg_on")
+    document.body.append(modal_bg)
     let main_card_editer_Modal = document.createElement('div')
-    main_card_editer_Modal.className = "main_card_editer_Modal"
+    main_card_editer_Modal.className = "main_card_editer container m-0 p-0 w-100 h-100"
     main_card_editer_Modal.innerHTML = `
-     <div class="d-flex justify-content-between align-items-center w-100"><h2 class="fw-bolder m-0">Card Edit</h2><span class="Modal_close_btn fs-1">&#215;</span></div>
-     <div class="d-flex flex-wrap w-100 flex-direction-row border p-2 border-muted rounded justify-content-center align-items-center" style="gap:20px 0;" >
-         <div class="Card_Edit_container overflowScroll" style="height: inherit;">
-             
-             <div class="Card_Crop_img_box  d-flex justify-content-center align-items-center m-auto Drop_box">
-                 <input type="file" id="Crop_Img_Upload" hidden>
-                 <label for="Crop_Img_Upload" class="py-1 px-2 text-white bg-info rounded"> Upload image </label>
-             </div>
-             <div class="container hide Selete_For_frot_img py-2 px1 d-flex flex-wrap justify-content-center align-items-center">
-                 <h2 class="text-center my-3">Select Front Img</h2>
-                 <div class="py-2 px1 d-flex selecting_img_Area flex-wrap justify-content-center align-items-center"></div>
-                 
-             </div>
-             <div class="img_croping_area w-100 hide">
-             <img src="" class="h-75 w-100 mb-3">
-                 <div class="Btn_box w-100 d-flex justify-content-end my-2">
-                     <button class="btn btn-primary back me-3">back</button>
-                     <button class="btn btn-primary next me-3">Next ></button>
+    <div class="d-flex row justify-content-between align-items-center p-3"><h2 class="fw-bolder w-25 m-0">Card Edit</h2><span class="Modal_close_btn  fs-1 px-2"  style="width: fit-content;">&#215;</span></div>
+    <div class=" row w-100 m-0 h-100 d-flex justify-content-center align-items-center">
+    <div class="col-md-6 col-sm-12  Card_Edit_container h-100 d-flex  justify-content-center align-items-center ">
+        
+        <div class="Card_Crop_img_box border w-100 d-flex justify-content-center align-items-center Drop_box ">
+            <input type="file" id="Crop_Img_Upload" hidden>
+            <label for="Crop_Img_Upload" class="py-1 px-2 text-white bg-info rounded"> Upload image </label>
+        </div>
+        <div class="container Selete_For_frot_img py-2 px1 d-flex flex-column justify-content-center align-items-center hide">
+            <h2 class="text-center my-3">Select Front Img</h2>
+            <div class="py-2 px1 d-flex selecting_img_Area flex-wrap justify-content-center align-items-center"></div>
+            
+        </div>
+        <div class="img_croping_area w-100 hide">
+        <img src="" class="h-75 w-100 mb-3">
+            <div class="Btn_box w-100 d-flex justify-content-end my-2">
+                <button class="btn btn-primary back me-3">back</button>
+                <button class="btn btn-primary next me-3">Next ></button>
+            </div>
+
+        </div>
+        <div class="Card_data row d-flex flex-wrap justify-content-center align-items-center hide">
+            <h2 class="text-center my-3">Card Details</h2>
+            <div class="data_for_card px-4 h-100 ">
+
+               <div class="text writing">
+                   <input type="text" id="Card_Title" maxlength="20" />
+                   <label for="Card_Title" class=" fw-bold">Card Title</label>
+                      <span></span>
                  </div>
- 
-             </div>
-             <div class="Card_data row d-flex flex-wrap justify-content-center align-items-center hide">
-                 <h2 class="text-center my-3">Card Details</h2>
-                 <div class="data_for_card px-4 h-100 ">
-                     <label for="Card_Title" class=" fw-bold">Card Title</label>
-                     <input type="text" id="Card_Title" maxlength="20" class="w-100 p-1 my-1"/>
+                 <div class="textarea writing">
+                     <textarea type="text" id="Card_Description"></textarea>
                      <label for="Card_Description" class=" fw-bold">Card Description</label>
-                     <input type="text" id="Card_Description" maxlength="180" class="w-100 p-1 my-1"/>
-                     <label for="Card_discounted_price" class=" fw-bold">Card discounted price</label>
-                     <input type="number" id="Card_discounted_price" class="w-100 p-1 my-1"/>
+                   <span></span>
+                 </div>
+                 <div class="text writing">
+                     <input type="number" id="Card_discounted_price"/>
+                       <label for="Card_discounted_price" class=" fw-bold">Card discounted price</label>
+                         <span></span>
+                 </div>
+                 <div class="text writing">
+                     <input type="number" id="Card_price" />
                      <label for="Card_price" class=" fw-bold">Card price</label>
-                     <input type="number" id="Card_price" class="w-100 p-1 my-1"/>
-                     <label for="Card_price" class=" fw-bold">Add Tag</label>
-                     <div class="w-100 border rounded d-flex justify-content-between align-items-center ">
-                         <input type="text" id="Card_tag" class="border-0 p-1 my-1 d-inline" style="width: calc(100% - 70px);"/>
-                         <button class="btn h-100 text-white bg-secondary ms-2 Card_tag_btn">add</button>
-                     </div>
-                 <div class="Btn_box w-100 d-flex justify-content-end my-2">
-                     <button class="btn btn-primary back me-3">back</button>
-                     <button class="btn btn-primary next me-3">Create Card</button>
-                 </div>
-                 </div>
-             </div>
-         </div>
-         <div class="Card_preview_container  h-100">
-             <h3 class="text-center my-2">Preview</h3>
-             <div class="row d-flex flex-wrap p-2 justify-content-center align-items-center">
-                 <div class=" col-11">
-                 <div class="card" style="width:310px;">
-                    <div class="img-preview" style="height:200px; width: 310px;" class="card-img-top"></div>
-                    <div class="card-body">
-                        <div class="d-flex align-items-center justify-content-between my-2"> <h5 class="card-title d-inline-block m-0">Card title</h5><div class="tag bg-dark text-white px-2 py-1 rounded d-inline-block me-3">#021</div></div>
-                        <p class="card-text Card_Description text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <div class="text-secondary Card_tag_box"></div>
+                     <span></span>
+                   </div>
+                   <div class="text writing">
+                           <input type="text" id="Card_tag"/>
+                           <label for="Card_tag">Add Tag</label>
+                           <span></span>
+                           <button class="btn h-100  my-3 text-white bg-success ms-2 Card_tag_btn">add</button>
                     </div>
-                    <div class="w-100 h-100 mx-3">
-                        <div class="text-white "><span class="Discounted_price fw-bold text-decoration-line-through text-secondary">Rs : 200</span> <strong class="bg-dark d-inline px-3 py-2 rounded">Rs : <span class="Product_price">20000</span></strong></div>
-                    </div>
-                    </div>
-                 </div>
-             </div>
-         </div>
-     </div>
+
+            <div class="Btn_box w-100 d-flex justify-content-end my-2">
+                <button class="btn btn-primary back me-3">back</button>
+                <button class="btn btn-primary next me-3">Create Card</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 d-flex flex-column align-items-center Card_preview_container  h-100" style="min-width: 320px;">
+        <h3 class="text-center my-2">Preview</h3>
+        <div class="row d-flex flex-wrap p-2 justify-content-center align-items-center">
+            <div class=" col-11">
+            <div class="card" style="width:310px;">
+               <div class="img-preview" style="height:200px; width: 310px;" class="card-img-top"></div>
+               <div class="card-body">
+                   <div class="d-flex align-items-center justify-content-between my-2"> <h5 class="card-title d-inline-block m-0">Card title</h5><div class="tag bg-dark text-white px-2 py-1 rounded d-inline-block me-3">#021</div></div>
+                   <p class="card-text Card_Description text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                   <div class="text-secondary Card_tag_box"></div>
+               </div>
+               <div class="w-100 h-100 m-3">
+                   <div class="text-white "><span class="Discounted_price fw-bold text-decoration-line-through text-secondary">Rs : 200</span> <strong class="bg-dark d-inline px-3 py-2 rounded">Rs : <span class="Product_price">20000</span></strong></div>
+               </div>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>
      `
     let cropper, Card_tag_data = [], All_Images_For_Card = [], selected_img
     const Card_edit_Data = main_card_editer_Modal.querySelectorAll(".data_for_card input"),
@@ -91,7 +110,29 @@ export const Create_main_card_editer_Modal = () => {
         Modal_close_btn = main_card_editer_Modal.querySelector('.Modal_close_btn'),
         imgContainer = Card_Edit_container.querySelector('.img_croping_area img')
 
-    // console.log(Selete_For_frot_img)
+    console.log()
+    main_card_editer_Modal.querySelectorAll('.writing :is(input , textarea)').forEach(writinginput => {
+        writinginput.addEventListener('input', () => {
+          if (writinginput.value.trim() !== '') {
+            writinginput.classList.add('has-text');
+          } else {
+            writinginput.classList.remove('has-text');
+          }
+        });
+      });
+      
+      
+      /* Alto de textarea */
+      main_card_editer_Modal.querySelectorAll('.textarea textarea').forEach(textarea => {
+        textarea.addEventListener('input', () => {
+          textarea.style.height = '1em';
+          const scrollHeight = textarea.scrollHeight;
+          textarea.style.height = `${scrollHeight}px`;
+        });
+      });
+
+
+
     const Card_input_preview = (e) => {
         if (e.target.id == "Card_Title") { Card_Title.innerHTML = `${e.target.value}` }
         if (e.target.id == "Card_Description") { Card_Description.innerHTML = `${e.target.value}` }
@@ -174,7 +215,7 @@ export const Create_main_card_editer_Modal = () => {
     })
     Card_data_next.addEventListener('click', () => {
         main_card_editer_Modal.classList.add("hide")
-        document.querySelector('.modal_bg').classList.add('hide')
+        document.querySelector('.modal_bg_on').classList.add('hide')
         cropper.getCroppedCanvas().toBlob((blob) => {
             let Blob_reader = new FileReader()
             Blob_reader.readAsDataURL(blob)
@@ -222,14 +263,16 @@ export const Create_main_card_editer_Modal = () => {
 
     Modal_close_btn.onclick = () => {
         main_card_editer_Modal.classList.add("hide")
-        document.querySelector('.modal_bg').classList.add('hide')
+        modal_bg.classList.add('hide')
+    }
+    modal_bg.onclick = () => {
+        Modal_close_btn.click()
     }
     document.body.append(main_card_editer_Modal)
 
 
     const AddTagIntoCard = (e) => {
-
-        let tag = e.target.previousElementSibling
+        let tag = e.target.previousElementSibling.previousElementSibling.previousElementSibling
         if (tag.value.length <= 0) return;
         let tag_for_card = document.createElement('span')
         tag_for_card.innerHTML = tag.value
@@ -244,11 +287,11 @@ export const Create_main_card_editer_Modal = () => {
 
 
 const Create_modal_bg = () => {
-    let modal_bg = document.createElement("div")
-    modal_bg.classList.add("modal_bg")
-    document.body.appendChild(modal_bg)
+
+
 }
-let Data_array = []
+
+// let Data_array = []
 let Card_created = (forntIMG, AllImg, title, description, discount, price, tag, card_id) => {
 
     let Card_data = {
@@ -268,17 +311,30 @@ let Card_created = (forntIMG, AllImg, title, description, discount, price, tag, 
 }
 //  function Card_created  (forntIMG, AllImg, title, description, discount, price, tag , Card_id_no){
 
-//     this.Card_preivew_img = forntIMG
-//     this.Card_all_imgs = AllImg
-//     this.Card_title = title
-//     this.Card_Description = description
-//     this.Card_Discounted_price = discount
-//     this.Card_Price = price
-//     this.Card_Tags = tag
-//     this.Card_id_no = Card_id_no
+//     let obj = {
+//         "Card_id_no": 205,
+//         "Card_title": "Aiman Khan ",
+//         "Is_featured": 1,
+//         "Card_preivew_img": "https://kapracollection.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-09-27-at-2.07.55-AM.jpeg",
+//         "Card_Discounted_price": "",
+//         "Card_Description": "SHIRT Fully Heavy Embroidered Mirrors work Body Emblished With s Stones &amp; Mirrors, Full Length Heavy Embroidered Fabric For Frock With Complete Length &amp; Width (3yard &amp; 52 inches length of only frock not included body)Extremly Heavy Embroidered With Seprate Ending Border For Froc <br/> SLEEVES Embroidered Sleevs,Heavy Bunch For Cuff <br/> DUPATA Net Based Duppata Four Sided Heavy Border <br/> TROUSER Plain Malai Fabric For Trouse <br/> &nbsp;",
+//         "Card_Price": 4200,
+//         "Card_Tags": ["Aiman Khan", "Orange Dupatta"],
+//         "Card_all_imgs": [
+//             "https://kapracollection.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-09-27-at-2.07.55-AM.jpeg",
+//             "https://kapracollection.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-09-27-at-2.07.52-AM.jpeg",
+//             "https://kapracollection.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-09-27-at-2.07.54-AM-1.jpeg",
+//             "https://kapracollection.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-09-27-at-2.07.55-AM-1.jpeg",
+//             "https://kapracollection.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-09-27-at-2.07.56-AM-1.jpeg"
+//         ]
+//     }
 //  }
 
 
-const Open_modal = () => {
+let Open_modal_btn = document.querySelector('.ADD_NEW_CARD_BTN button')
+
+Open_modal_btn.addEventListener("click", () => {
     Create_main_card_editer_Modal()
-}
+})
+
+

@@ -49,5 +49,27 @@ const Rendering_card = (Data_for_Render, CARD_area) => {
                 Card_tag_box[i].appendChild(Tagspan)
             }
         }
+        let allCard = CARD_area.querySelectorAll('.card_parent')
+        allCard.forEach(elm => {
+            elm.addEventListener("click", () => {
+                let click_id = elm.querySelector('.card_id').innerText.split("#").join("")
+                for (let j = 0; j < Data_for_Render.length; j++) {
+                    if (Data_for_Render[j].Card_id_no == click_id) {
+                        Open_big_card(Data_for_Render[j])
+
+                    }
+                }
+            })
+        })
     }
+}
+
+
+
+window.Open_big_card = (card) => {
+    window.location.pathname = "pages/card.html"
+    let daa = []
+    daa.push(card)
+    console.log(daa)
+    localStorage.setItem("card", JSON.stringify(daa))
 }
