@@ -28,12 +28,12 @@ cart_side_bar.innerHTML = `
     </div>
     
     <div class="row px-3 border-top py-3 ">
-      <div class="SubTotal_quick_Cart fs-6"> Subtotal : <span>12,000<span></div>
+      <div class="SubTotal_quick_Cart fs-6"> Subtotal : <span>0<span></div>
     </div>
     <div class="row px-3 py-3 d-flex flex-column border-top">
       <div class="d-flex flex-column gap-3">
         <button class="btn btn-primary" onclick="VeiwCart()"> Veiw Cart</button>
-        <button class="btn btn-primary">  Checkout Cart  </button>
+        <button class="btn btn-primary" onclick="checkout()" >  Checkout Cart  </button>
       </div>
     </div>
 
@@ -42,6 +42,11 @@ cart_side_bar.innerHTML = `
   window.VeiwCart = ()=>{
     if(JSON.parse(localStorage.getItem('cart_items')).length > 0){
       window.location.pathname ="pages/cart.html"
+    }
+  }
+  window.checkout = ()=>{
+    if(JSON.parse(localStorage.getItem('cart_items')).length > 0){
+      window.location.pathname ="pages/Checkout.html"
     }
   }
 let login_logout_btn = document.querySelector('.login_logout_btn')

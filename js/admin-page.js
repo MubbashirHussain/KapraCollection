@@ -67,8 +67,9 @@ onValue(prodref, (snap) => {
 let Featured_Products_data = [];
 
 let Create_Featured_Products = (main_data) => {
-
     let data = Object.values(main_data)
+
+    console.log(data)
     data.forEach(card => {
         if (card.Is_featured == 1) {
             Featured_Products_data.push(card)
@@ -108,7 +109,7 @@ let Create_Featured_Products = (main_data) => {
         document.body.classList.add('stop-scrolling')
         modal_bg.classList.add("modal_bg_on")
         modal.innerHTML = ''
-        Rendering_card(data, modal, getting_key, main_data)
+        Rendering_card(data, modal, delete_card, main_data)
         modal_bg.onclick = () => {
             modal.classList.add("hide")
             modal_bg.classList.remove('modal_bg_on')
@@ -163,7 +164,7 @@ const Rendering_card = (Data_for_Render, CARD_area, CARD_click_func, main_data, 
 }
 
 const Edit_card_function = (one_card, main_data) => {
-    // getting_key(one_card , main_data , undefined)
+
 
     modal_bg.classList.remove("hide")
     modal.classList.remove("hide")
@@ -214,7 +215,7 @@ const Edit_card_function = (one_card, main_data) => {
                            <button class="btn h-100  my-3 text-white bg-success ms-2" onclick="AddTagIntoCard(this)">add</button>
                     </div>
 
-            <div class="Btn_box w-100 d-flex justify-content-end my-2 "onclick="update_card()">
+            <div class="Btn_box w-100 d-flex justify-content-end my-2 "onclick="update_card_obj()">
                 <button class="btn btn-primary next me-3">updatde Card</button>
             </div>
             </div>
@@ -259,9 +260,8 @@ const Edit_card_function = (one_card, main_data) => {
         // console.log(tag.value)
     }
 
+    window.update_card_obj = () => {
 
-    console.log(Card_Title)
-    window.update_card = () => {
         let Card_Title = modal.querySelector('#Card_Title').value
         let Card_Description = modal.querySelector('#Card_Description').innerText
         let Card_discounted_price = modal.querySelector('#Card_discounted_price').value
@@ -273,52 +273,58 @@ const Edit_card_function = (one_card, main_data) => {
             Card_Price: Card_price,
             Card_Tags: one_card.Card_Tags,
         }
-        getting_key(one_card, main_data, obj_for_update)
+        update_card(one_card, main_data, obj_for_update)
     }
 
 }
 
 
 
-const ADD_and_remove = (card_data, main_data) => {
-    console.log(card_data.Is_featured)
-    for (const key in main_data) {
-        if (card_data.Card_id_no === main_data[key].Card_id_no) {
-            if (card_data.Is_featured == 1) {
-                let UpRef = dbRef(db, `Products/${key}`)
-                dbUpdate(UpRef, {
-                    Is_featured: 0
-                })
-                window.location.reload()
-            } else if (card_data.Is_featured == 0) {
-                modal_bg.click()
-                let UpRef = dbRef(db, `Products/${key}`)
-                console.log(UpRef)
-                dbUpdate(UpRef, {
-                    Is_featured: 1
-                })
-                window.location.reload()
-            }
-
+window.ADD_and_remove = (card_data, main_data) => {
+    let key = card_data.id
+    if (card_data.Card_id_no === main_data[key].Card_id_no) {
+        if (card_data.Is_featured == 1) {
+            let UpRef = dbRef(db, `Products/${key}`)
+            dbUpdate(UpRef, {
+                Is_featured: 0
+            })
+            window.location.reload()
+        } else if (card_data.Is_featured == 0) {
+            modal_bg.click()
+            let UpRef = dbRef(db, `Products/${key}`)
+            // console.log(UpRef)
+            dbUpdate(UpRef, {
+                Is_featured: 1
+            })
+            window.location.reload()
         }
+
     }
 }
 
 
 
-const getting_key = (card_data, main_data, obj) => {
-    for (const key in main_data) {
+window.update_card = (card_data, main_data, obj) => {
+    if (card_data != undefined && main_data != undefined) {
+        let key = card_data.id;
         if (card_data.Card_id_no === main_data[key].Card_id_no) {
             let UpRef = dbRef(db, `Products/${key}`)
-            if (obj != undefined) {
-                dbUpdate(UpRef, obj)
-            } else {
-                dbremove(UpRef)
-            }
+            dbUpdate(UpRef, obj)
             window.location.reload()
         }
     }
 }
+window.delete_card = (card_data , main_data) => {
+    if (card_data != undefined && main_data != undefined) {
+        let key = card_data.id;
+        if (card_data.Card_id_no === main_data[key].Card_id_no) {
+            let UpRef = dbRef(db, `Products/${key}`)
+            dbremove(UpRef)
+            window.location.reload()
+        }
+    }
+}
+
 
 
 

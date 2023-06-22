@@ -425,6 +425,12 @@ opacity: 0.3;}
 .close_side_bar_anim{
   width:0;
 }
+.width_fit_content{
+  width: fit-content;
+}
+.height_fit_content{
+  height: fit-content;
+}
 .delete_btn:hover{
   color: #000 !important;
   transition: 0.5s;
