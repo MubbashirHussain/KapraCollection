@@ -47,7 +47,7 @@ const Admin_sidebar_ul = document.querySelector('.Admin_sidebar_ul'),
     DELETE_BTN = admin_Shop.querySelector('.DELETE_BTN button'),
     Edit_card_container = admin_Shop.querySelector('.Edit_card_container .AllCards')
 
-console.log(Edit_card_container)
+// console.log(Edit_card_container)
 
 let modal = document.createElement('div')
 let modal_bg = document.createElement('div')
@@ -69,7 +69,7 @@ let Featured_Products_data = [];
 let Create_Featured_Products = (main_data) => {
     let data = Object.values(main_data)
 
-    console.log(data)
+    // console.log(data)
     data.forEach(card => {
         if (card.Is_featured == 1) {
             Featured_Products_data.push(card)
@@ -82,7 +82,7 @@ let Create_Featured_Products = (main_data) => {
         AddFeatured_btn.disabled = false
 
     }
-    console.log(Featured_Products_data.length)
+    // console.log(Featured_Products_data.length)
     Rendering_card(Featured_Products_data, Featured_Products, ADD_and_remove, main_data)
     Rendering_card(data, Edit_card_container, Edit_card_function, main_data)
 
@@ -175,7 +175,7 @@ const Edit_card_function = (one_card, main_data) => {
         modal_bg.classList.remove('modal_bg_on')
         document.body.classList.remove("stop-scrolling")
     }
-    console.log(one_card.Card_Description)
+    // console.log(one_card.Card_Description)
     // let main_card_editer_Modal = document.createElement('div')
     // main_card_editer_Modal.className = "main_card_editer container m-0 p-0 w-100 h-100"
     modal.innerHTML = ''
@@ -314,7 +314,7 @@ window.update_card = (card_data, main_data, obj) => {
         }
     }
 }
-window.delete_card = (card_data , main_data) => {
+window.delete_card = (card_data, main_data) => {
     if (card_data != undefined && main_data != undefined) {
         let key = card_data.id;
         if (card_data.Card_id_no === main_data[key].Card_id_no) {
@@ -324,33 +324,6 @@ window.delete_card = (card_data , main_data) => {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 li_admin_logout.onclick = () => {
@@ -412,9 +385,186 @@ li_admin_preview.addEventListener("click", () => {
     admin_preview.classList.remove("hide")
 
 })
-li_admin_logout.addEventListener("click", () => {
 
+let table_container = document.querySelector('.table_container')
+let Compeleted_order_btn = document.querySelector('.Compeleted_order_btn')
+console.log(table_container)
 
-
+let order_ref = dbRef(db, "Order/")
+onValue(order_ref, (snap) => {
+    console.log(snap)
+    let order_data = Object.values(snap.val())
+    creating_order_data_deshborad(order_data)
 })
+
+const creating_order_data_deshborad = (data) => {
+    console.log(data)
+    if(data == undefined || data.length < 1) {
+        table_container.innerHTML = `
+        <h1> No Orders 😕</h1>
+        `
+        return
+    }
+    // console.log(data[0].Order_details.Order_key)
+    // console.log(data[0].Order_details.payment_method)
+    // console.log(data[0].Order_details.ordered_cards)
+    table_container.innerHTML = ''
+    for (let i = 0; i < data.length; i++) {
+        let table = document.createElement('table')
+        table.className = "cart_Table table table-striped table-bordered"
+        console.log(table)
+        table.innerHTML = `
+        <thead class="table-dark">
+            <tr>
+            <td colspan="2"> Order Id :  ${data[i].Order_details.Order_key} </td>
+            <td colspan="2"> Payment Method :  ${data[i].Order_details.payment_method} </td>
+            <td class="text-end"><button class="btn btn-primary Show_customer">Customer Details</button>  </td>
+            </tr>
+            </thead> 
+        <tbody>
+        </tbody>
+        <tfoot class="table-dark">
+        <tr>
+            <td colspan="2"></td>
+            <td class="text-start">Total Rs : <span class="Total_order"> </span></td>
+            <td colspan=""></td>
+            <td class="text-end"><button class="btn btn-success complete_order">Complete</button> </td>
+        </tr>
+            </tfoot>
+        `
+        let orderS = JSON.parse(data[0].Order_details.ordered_cards);
+        // console.log(orderS)
+        let tbody = table.querySelector("tbody")
+        tbody.innerHTML = ""
+        let subtotal = 0
+        for (let j = 0; j < orderS.length; j++) {
+            tbody.innerHTML += `
+                <tr>
+                <td><img src="${orderS[j].previewIMG}" class="object_fit_cover" style="height:50px; width:50px;"></td>
+                    <td>${orderS[j].Product}</td>
+                    <td>${orderS[j].price}</td>
+                    <td>${orderS[j].quantity}</td>
+                    <td>#${orderS[j].card_id_no}</td>
+                </tr>    
+            `
+            // subtotal = subtotal + parseInt(orderS[j].price * parseInt(orderS[j].quantity)).toLocaleString("PKR")
+            subtotal =  parseInt(subtotal) + parseInt(orderS[j].price) * parseInt(orderS[j].quantity).toLocaleString("PKR")
+        }
+        table.querySelector('tfoot').querySelector('.Total_order').innerHTML = subtotal
+        let Show_customer = table.querySelector('.Show_customer')
+        let complete_order = table.querySelector('.complete_order')
+        complete_order.onclick = () => {
+            let CompeleteRef = dbRef(db, `Completed_orders/${data[i].Order_details.Order_key}/`)
+            dbset(CompeleteRef, data[i])
+            let RemoverRef = dbRef(db, `Order/${data[i].Order_details.Order_key}`)
+            dbremove(RemoverRef)
+        }
+        Show_customer.onclick = (e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            modal_bg.classList.remove("hide")
+            modal.classList.remove("hide")
+            document.body.classList.add('stop-scrolling')
+            modal_bg.classList.add("modal_bg_on")
+            modal.innerHTML = ''
+            Render_customer(data[i].Customer_details, modal)
+            modal_bg.onclick = () => {
+                modal.classList.add("hide")
+                modal_bg.classList.remove('modal_bg_on')
+                document.body.classList.remove("stop-scrolling")
+            }
+
+        }
+
+        table_container.append(table)
+    }
+}
+
+window.Render_completed_orders = (modal) => {
+    let completeRef = dbRef(db, "Completed_orders/")
+    onValue(completeRef, (snap) => {
+        let data = Object.values(snap.val())
+        console.log(data)
+        modal.innerHTML = `<h2 class="my-2">Completed Orders</h2>`
+        // let OrderedCARD;
+        for (let i = 0; i < data.length; i++) {
+            modal.style.alignContent = "flex-start"
+            let ul  =  document.createElement('ul')
+            ul.className = "w-100 border CUS bg-light border-dark m-3 rounded"
+            ul.style.width = "calc(100% - 50px)"
+            ul.style.height= "fit-content"
+            ul.innerHTML = `<li class="marker p-2 w-100"><strong> Customer Name :</strong>  ${data[i].Customer_details.First_name}  <strong>Order Key :</strong> ${data[i].Order_details.Order_key}  </li>`
+            let OrderedCARD = JSON.parse(data[i].Order_details.ordered_cards)
+            console.log(OrderedCARD)
+            for (let j = 0; j < OrderedCARD.length; j++) {
+                ul.innerHTML += `
+                <li class="marker p-2"> <strong>Product :</strong>  ${OrderedCARD[j].Product} <strong> Price :</strong> ${OrderedCARD[j].price} X${OrderedCARD[j].quantity}</li>
+             `}
+             console.log(ul)
+             modal.append(ul)
+        }
+    })
+}
+
+Compeleted_order_btn.onclick = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    modal_bg.classList.remove("hide")
+    modal.classList.remove("hide")
+    document.body.classList.add('stop-scrolling')
+    modal_bg.classList.add("modal_bg_on")
+    modal.innerHTML = ''
+    Render_completed_orders(modal)
+    modal_bg.onclick = () => {
+        modal.classList.add("hide")
+        modal_bg.classList.remove('modal_bg_on')
+        document.body.classList.remove("stop-scrolling")
+    }
+}
+
+window.Render_customer = (customer, modal) => {
+    modal.innerHTML = `
+<h2>Customer Details</h2>
+<ul class="w-100" >
+    <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> First name :  ${customer.First_name}</li>
+    <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> Last name :  ${customer.Last_name}</li>
+    <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> Email address :  ${customer.Email_address}</li>
+    <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> Post code :  ${customer.Post_code}</li>
+    <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> City name :  ${customer.City_name}</li>
+    <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> Select State :  ${customer.Select_State}</li>
+    <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> Select country :  ${customer.Select_country}</li>
+    <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> Order notes :  ${customer.Order_notes}</li>
+</ul>
+`
+    console.log(customer)
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

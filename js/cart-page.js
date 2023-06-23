@@ -37,7 +37,7 @@ cart_pro_table.innerHTML = `
 `
 let tbody = cart_pro_table.querySelector('tbody')
 let Update_btn = cart_pro_table.querySelector('tfoot td button')
-console.log(LS_items)
+// console.log(LS_items)
 if(LS_items == undefined || LS_items.length < 1){
     cart_pro_table.innerHTML = 'no list...'
 } 

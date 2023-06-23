@@ -60,9 +60,8 @@ for (let i = 0; i < Order_details.length; i++) {
         return
     }
 }    
-
-    let payment_method_select = payment_method.querySelector('.payment_method input[type = radio]:checked')
-    let oredr_ref =  dbpush(dbRef(db ,'Order/'))
+let payment_method_select = payment_method.querySelector('.payment_method input[type = radio]:checked')
+let oredr_ref =  dbpush(dbRef(db ,'Order/'))
   let Subtotal = 0
     for (let i = 0; i < LS_items.length; i++) {
          obj = {
@@ -74,7 +73,7 @@ for (let i = 0; i < Order_details.length; i++) {
             "OBJ_id" : LS_items[i].id
         }   
         arra.push(obj)
-        Subtotal = (Subtotal + parseInt(obj.price  * obj.quantity)).toLocaleString("PKR")
+        Subtotal =  parseInt(Subtotal) + parseInt(obj.price* obj.quantity).toLocaleString("PKR")
     }
     
     localStorage.setItem("place_order",JSON.stringify([oredr_ref.key  , Subtotal , payment_method_select.id]))
@@ -101,9 +100,12 @@ for (let i = 0; i < Order_details.length; i++) {
         dbset(oredr_ref ,{
             Customer_details : input_obj,
             Order_details  : Order_card_details,
-        } )
+        })
 
-        window.location.pathname = "pages/Thanks-for-purchasing.html"
+        Place_order_btn.disabled = true
+        setInterval(()=>{
+         window.location.pathname = "pages/Thanks-for-purchasing.html"
+        },1000)    
 })
 Order_details_form.addEventListener("submit",(e)=>{
     e.preventDefault()
