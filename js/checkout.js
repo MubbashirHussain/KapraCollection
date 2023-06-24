@@ -53,13 +53,13 @@ Order_details.forEach(element => {
 });
 
 Place_order_btn.addEventListener('click',()=>{
-for (let i = 0; i < Order_details.length; i++) {
-    console.log(Order_details[i].required) 
-    if(Order_details[i].value.length  < 1 && Order_details[i].required) {
-        Order_details[i].style.boxShadow = "0 0 0 1px red "
-        return
-    }
-}    
+// for (let i = 0; i < Order_details.length; i++) {
+//     console.log(Order_details[i].required) 
+//     if(Order_details[i].value.length  < 1 && Order_details[i].required) {
+//         Order_details[i].style.boxShadow = "0 0 0 1px red "
+//         return
+//     }
+// }    
 let payment_method_select = payment_method.querySelector('.payment_method input[type = radio]:checked')
 let oredr_ref =  dbpush(dbRef(db ,'Order/'))
   let Subtotal = 0
@@ -73,7 +73,11 @@ let oredr_ref =  dbpush(dbRef(db ,'Order/'))
             "OBJ_id" : LS_items[i].id
         }   
         arra.push(obj)
-        Subtotal =  parseInt(Subtotal) + parseInt(obj.price* obj.quantity).toLocaleString("PKR")
+        console.log(obj.price)
+        console.log(obj.quantity)
+        console.log(typeof Subtotal +": subtotal")
+        Subtotal =  parseInt(Subtotal) + (obj.price) * (obj.quantity).toLocaleString("PKR")
+        console.log(typeof Subtotal)
     }
     
     localStorage.setItem("place_order",JSON.stringify([oredr_ref.key  , Subtotal , payment_method_select.id]))
@@ -83,12 +87,15 @@ let oredr_ref =  dbpush(dbRef(db ,'Order/'))
             First_name  : Order_details[0].value,
             Last_name : Order_details[1].value,
             Email_address : Order_details[2].value,
-            Select_country : Order_details[3].value,
-            Select_State : Order_details[4].value,
-            City_name : Order_details[6].value,
-            Post_code : Order_details[7].value,
-            Order_notes : Order_details[8].value,
+            Phone_No: Order_details[3].value,
+            Select_country : Order_details[4].value,
+            Select_State : Order_details[5].value,
+            Street_address : Order_details[6].value,
+            City_name : Order_details[7].value,
+            Post_code : Order_details[8].value,
+            Order_notes : Order_details[9].value,
         } 
+        console.log(input_obj)
         let Order_card_details = {
             ordered_cards : JSON.stringify(arra),
             Order_key : oredr_ref.key,
@@ -96,11 +103,10 @@ let oredr_ref =  dbpush(dbRef(db ,'Order/'))
 
         }   
 
-
-        dbset(oredr_ref ,{
-            Customer_details : input_obj,
-            Order_details  : Order_card_details,
-        })
+        // dbset(oredr_ref ,{
+        //     Customer_details : input_obj,
+        //     Order_details  : Order_card_details,
+        // })
 
         Place_order_btn.disabled = true
         setInterval(()=>{

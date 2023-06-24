@@ -175,9 +175,6 @@ const Edit_card_function = (one_card, main_data) => {
         modal_bg.classList.remove('modal_bg_on')
         document.body.classList.remove("stop-scrolling")
     }
-    // console.log(one_card.Card_Description)
-    // let main_card_editer_Modal = document.createElement('div')
-    // main_card_editer_Modal.className = "main_card_editer container m-0 p-0 w-100 h-100"
     modal.innerHTML = ''
     modal.innerHTML = `
         <div class="d-flex row justify-content-between align-items-center"><h2 class="fw-bolder m-0">Card Edit</h2><span class="Modal_close_btn fs-1">&#215;</span></div>
@@ -405,9 +402,6 @@ const creating_order_data_deshborad = (data) => {
         `
         return
     }
-    // console.log(data[0].Order_details.Order_key)
-    // console.log(data[0].Order_details.payment_method)
-    // console.log(data[0].Order_details.ordered_cards)
     table_container.innerHTML = ''
     for (let i = 0; i < data.length; i++) {
         let table = document.createElement('table')
@@ -447,7 +441,6 @@ const creating_order_data_deshborad = (data) => {
                     <td>#${orderS[j].card_id_no}</td>
                 </tr>    
             `
-            // subtotal = subtotal + parseInt(orderS[j].price * parseInt(orderS[j].quantity)).toLocaleString("PKR")
             subtotal =  parseInt(subtotal) + parseInt(orderS[j].price) * parseInt(orderS[j].quantity).toLocaleString("PKR")
         }
         table.querySelector('tfoot').querySelector('.Total_order').innerHTML = subtotal
@@ -529,8 +522,10 @@ window.Render_customer = (customer, modal) => {
     <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> First name :  ${customer.First_name}</li>
     <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> Last name :  ${customer.Last_name}</li>
     <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> Email address :  ${customer.Email_address}</li>
+    <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> Phone no :  ${customer.Phone_No}</li>
     <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> Post code :  ${customer.Post_code}</li>
     <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> City name :  ${customer.City_name}</li>
+    <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> Adress :  ${customer.Street_address}</li>
     <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> Select State :  ${customer.Select_State}</li>
     <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> Select country :  ${customer.Select_country}</li>
     <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> Order notes :  ${customer.Order_notes}</li>

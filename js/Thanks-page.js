@@ -1,6 +1,6 @@
 if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-    localStorage.removeItem("cart_items")
-    localStorage.removeItem("place_order")
+    // localStorage.removeItem("cart_items")
+    // localStorage.removeItem("place_order")
   }
 
 let Order_details = document.querySelector('.Order_details'),
