@@ -177,7 +177,7 @@ const Edit_card_function = (one_card, main_data) => {
     }
     modal.innerHTML = ''
     modal.innerHTML = `
-        <div class="d-flex row justify-content-between align-items-center"><h2 class="fw-bolder m-0">Card Edit</h2><span class="Modal_close_btn fs-1">&#215;</span></div>
+    <div class="d-flex row justify-content-between align-items-center p-3 w-100 "><h2 class="fw-bolder w-25 m-0">Card Edit</h2><span class="Modal_close_btn  fs-1 px-2"  style="width: fit-content;">&#215;</span></div>
         <div class=" row w-100 m-0 h-100 d-flex justify-content-center align-items-center">
         <div class="col-md-6 col-sm-12  Card_Edit_container h-100 d-flex  justify-content-center align-items-center ">
 
@@ -260,7 +260,7 @@ const Edit_card_function = (one_card, main_data) => {
     window.update_card_obj = () => {
 
         let Card_Title = modal.querySelector('#Card_Title').value
-        let Card_Description = modal.querySelector('#Card_Description').innerText
+        let Card_Description = modal.querySelector('#Card_Description').value
         let Card_discounted_price = modal.querySelector('#Card_discounted_price').value
         let Card_price = modal.querySelector('#Card_price').value
         let obj_for_update = {
@@ -385,17 +385,14 @@ li_admin_preview.addEventListener("click", () => {
 
 let table_container = document.querySelector('.table_container')
 let Compeleted_order_btn = document.querySelector('.Compeleted_order_btn')
-console.log(table_container)
 
 let order_ref = dbRef(db, "Order/")
 onValue(order_ref, (snap) => {
-    console.log(snap)
     let order_data = Object.values(snap.val())
     creating_order_data_deshborad(order_data)
 })
 
 const creating_order_data_deshborad = (data) => {
-    console.log(data)
     if(data == undefined || data.length < 1) {
         table_container.innerHTML = `
         <h1> No Orders 😕</h1>
@@ -406,7 +403,6 @@ const creating_order_data_deshborad = (data) => {
     for (let i = 0; i < data.length; i++) {
         let table = document.createElement('table')
         table.className = "cart_Table table table-striped table-bordered"
-        console.log(table)
         table.innerHTML = `
         <thead class="table-dark">
             <tr>
@@ -477,7 +473,6 @@ window.Render_completed_orders = (modal) => {
     let completeRef = dbRef(db, "Completed_orders/")
     onValue(completeRef, (snap) => {
         let data = Object.values(snap.val())
-        console.log(data)
         modal.innerHTML = `<h2 class="my-2">Completed Orders</h2>`
         // let OrderedCARD;
         for (let i = 0; i < data.length; i++) {
@@ -488,12 +483,10 @@ window.Render_completed_orders = (modal) => {
             ul.style.height= "fit-content"
             ul.innerHTML = `<li class="marker p-2 w-100"><strong> Customer Name :</strong>  ${data[i].Customer_details.First_name}  <strong>Order Key :</strong> ${data[i].Order_details.Order_key}  </li>`
             let OrderedCARD = JSON.parse(data[i].Order_details.ordered_cards)
-            console.log(OrderedCARD)
             for (let j = 0; j < OrderedCARD.length; j++) {
                 ul.innerHTML += `
                 <li class="marker p-2"> <strong>Product :</strong>  ${OrderedCARD[j].Product} <strong> Price :</strong> ${OrderedCARD[j].price} X${OrderedCARD[j].quantity}</li>
              `}
-             console.log(ul)
              modal.append(ul)
         }
     })
@@ -531,8 +524,6 @@ window.Render_customer = (customer, modal) => {
     <li style="width:calc(100% - 50px);" class="marker m-2 p-3 bg-light border"> Order notes :  ${customer.Order_notes}</li>
 </ul>
 `
-    console.log(customer)
-
 }
 
 

@@ -1,3 +1,4 @@
+import { dbremove, db, dbRef, dbset, onValue, dbUpdate ,Storage , StoreRef ,uploadBytesResumable , getDownloadURL, dbpush} from "../js/firebase.js";
 
 
 
@@ -74,7 +75,7 @@ const Create_main_card_editer_Modal = () => {
             <div class="card" style="width:310px;">
                <div class="img-preview" style="height:200px; width: 310px;" class="card-img-top"></div>
                <div class="card-body">
-                   <div class="d-flex align-items-center justify-content-between my-2"> <h5 class="card-title d-inline-block m-0">Card title</h5><div class="tag bg-dark text-white px-2 py-1 rounded d-inline-block me-3">#021</div></div>
+                   <div class="d-flex align-items-center justify-content-between my-2"> <h5 class="card-title d-inline-block m-0">Card title</h5><div class="tag Card_id_no bg-dark text-white px-2 py-1 rounded d-inline-block me-3">ID No</div></div>
                    <p class="card-text Card_Description text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                    <div class="text-secondary Card_tag_box"></div>
                </div>
@@ -87,11 +88,12 @@ const Create_main_card_editer_Modal = () => {
     </div>
 </div>
      `
-    let cropper, Card_tag_data = [], All_Images_For_Card = [], selected_img
-    const Card_edit_Data = main_card_editer_Modal.querySelectorAll(".data_for_card input"),
+    let cropper, Card_tag_data = [], All_Images_For_Card = [], selected_img , MAX_id_no = [] 
+    const Card_edit_Data = main_card_editer_Modal.querySelectorAll(".data_for_card input , textarea"),
         Card_preview_container = main_card_editer_Modal.querySelector('.Card_preview_container'),
         Card_Edit_container = main_card_editer_Modal.querySelector('.Card_Edit_container'),
         Card_Title = Card_preview_container.querySelector('.card-title'),
+        Card_id_no = Card_preview_container.querySelector('.Card_id_no'),
         Card_Description = Card_preview_container.querySelector('.Card_Description'),
         Product_price = Card_preview_container.querySelector('.Product_price'),
         Card_discounted_price = Card_preview_container.querySelector('.Discounted_price'),
@@ -110,7 +112,6 @@ const Create_main_card_editer_Modal = () => {
         Modal_close_btn = main_card_editer_Modal.querySelector('.Modal_close_btn'),
         imgContainer = Card_Edit_container.querySelector('.img_croping_area img')
 
-    console.log()
     main_card_editer_Modal.querySelectorAll('.writing :is(input , textarea)').forEach(writinginput => {
         writinginput.addEventListener('input', () => {
           if (writinginput.value.trim() !== '') {
@@ -135,7 +136,7 @@ const Create_main_card_editer_Modal = () => {
 
     const Card_input_preview = (e) => {
         if (e.target.id == "Card_Title") { Card_Title.innerHTML = `${e.target.value}` }
-        if (e.target.id == "Card_Description") { Card_Description.innerHTML = `${e.target.value}` }
+        if (e.target.id == "Card_Description") { Card_Description.innerText = `${e.target.value}`}
         if (e.target.id == "Card_price") { Product_price.innerHTML = `${e.target.value}` }
         if (e.target.id == "Card_discounted_price") {
             Card_discounted_price.innerHTML = `${(e.target.value.length <= 0) ? Card_discounted_price.innerHTML = "" : 'Rs :' + e.target.value}`
@@ -151,12 +152,12 @@ const Create_main_card_editer_Modal = () => {
         if (type.split('/')[0] !== "image") return;
         Drop_box.classList.add("hide")
         Selete_For_frot_img.classList.remove("hide")
+        All_Images_For_Card.push(file)
+
         let F_reader = new FileReader()
         F_reader.readAsDataURL(file)
         F_reader.onloadend = () => {
-            All_Images_For_Card.push(F_reader.result)
-
-            selecting_img_Area.innerHTML +=
+        selecting_img_Area.innerHTML +=
                 `<img class="rounded p-3 SelectedImg" src="${F_reader.result}" style="height: 200px; width: 200px; object-fit: cover;">`
 
             selected_img = selecting_img_Area.querySelectorAll('.SelectedImg');
@@ -217,11 +218,18 @@ const Create_main_card_editer_Modal = () => {
         main_card_editer_Modal.classList.add("hide")
         document.querySelector('.modal_bg_on').classList.add('hide')
         cropper.getCroppedCanvas().toBlob((blob) => {
-            let Blob_reader = new FileReader()
-            Blob_reader.readAsDataURL(blob)
-            Blob_reader.onloadend = () => {
-                Card_created(Blob_reader.result, All_Images_For_Card, Card_Title, Card_Description, Card_discounted_price, Product_price, Card_tag_data, "021")
-            }
+                 let im =  new File([blob], "image" , {type : blob.type})
+
+                let Ref = dbRef(db , "Products/")
+                onValue(Ref , (snap)=>{
+                    let data = Object.values(snap.val())
+                    for (let i = 0; i < data.length; i++) {
+                        MAX_id_no.push(data[i].Card_id_no)
+                    }
+                })
+                let ID_no  = Math.max(...MAX_id_no) + 1;
+                Card_created(im, All_Images_For_Card, Card_Title, Card_Description, Card_discounted_price, Product_price, Card_tag_data, ID_no)
+                
         })
     })
     Drop_box.addEventListener("dragenter", e => {
@@ -292,44 +300,76 @@ const Create_modal_bg = () => {
 }
 
 // let Data_array = []
-let Card_created = (forntIMG, AllImg, title, description, discount, price, tag, card_id) => {
+let Card_created  = async (forntIMG, AllImg, Card_title, description, discount, price, tag, card_id) => {
+    console.log(forntIMG)
+    console.log(AllImg)
+
+
+let uploadfile = (file) => {
+    return new Promise((resolve, reject) => {
+      console.log(file);
+      const storageRef = StoreRef(Storage, `images/${file.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+          }
+        },
+        (error) => {
+          reject(error);
+          console.log(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            resolve(downloadURL);
+          });
+        }
+      );
+    });
+  };
+    
+  let ALL_IMAGES = []
+  console.log(AllImg)
+for (let i = 0; i < AllImg.length; i++) {
+    let Al_Img   = await uploadfile(AllImg[i])
+    ALL_IMAGES.push(Al_Img)
+}
+
+
+ let fonTimg  = await uploadfile(forntIMG)
+
+
+
+ let dBRef = dbpush(dbRef(db , "Products/"))
+
+
 
     let Card_data = {
-        Card_preivew_img: forntIMG,
-        Card_all_imgs: AllImg,
-        Card_title: title,
-        Card_Description: description,
-        Card_Discounted_price: discount,
-        Card_Price: price,
+        Card_preivew_img: fonTimg,
+        Card_all_imgs: ALL_IMAGES,
+        Card_title: Card_title.innerText,
+        Card_Description: description.innerText,
+        Card_Discounted_price: discount.innerText,
+        Card_Price: price.innerText,
         Card_Tags: tag,
         Card_id_no: card_id,
+        id: dBRef.key
     }
+    console.log(Card_data)
+    dbset(dBRef , Card_data)
 
-    Data_array.push(Card_data)
-    console.log(Data_array)
 
 }
-//  function Card_created  (forntIMG, AllImg, title, description, discount, price, tag , Card_id_no){
-
-//     let obj = {
-//         "Card_id_no": 205,
-//         "Card_title": "Aiman Khan ",
-//         "Is_featured": 1,
-//         "Card_preivew_img": "https://kapracollection.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-09-27-at-2.07.55-AM.jpeg",
-//         "Card_Discounted_price": "",
-//         "Card_Description": "SHIRT Fully Heavy Embroidered Mirrors work Body Emblished With s Stones &amp; Mirrors, Full Length Heavy Embroidered Fabric For Frock With Complete Length &amp; Width (3yard &amp; 52 inches length of only frock not included body)Extremly Heavy Embroidered With Seprate Ending Border For Froc <br/> SLEEVES Embroidered Sleevs,Heavy Bunch For Cuff <br/> DUPATA Net Based Duppata Four Sided Heavy Border <br/> TROUSER Plain Malai Fabric For Trouse <br/> &nbsp;",
-//         "Card_Price": 4200,
-//         "Card_Tags": ["Aiman Khan", "Orange Dupatta"],
-//         "Card_all_imgs": [
-//             "https://kapracollection.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-09-27-at-2.07.55-AM.jpeg",
-//             "https://kapracollection.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-09-27-at-2.07.52-AM.jpeg",
-//             "https://kapracollection.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-09-27-at-2.07.54-AM-1.jpeg",
-//             "https://kapracollection.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-09-27-at-2.07.55-AM-1.jpeg",
-//             "https://kapracollection.com/wp-content/uploads/2022/09/WhatsApp-Image-2022-09-27-at-2.07.56-AM-1.jpeg"
-//         ]
-//     }
-//  }
-
 
 let Open_modal_btn = document.querySelector('.ADD_NEW_CARD_BTN button')
 

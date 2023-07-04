@@ -15,7 +15,9 @@ body{
     content: '';
     display: none;
 }
-
+.z_index_2{
+  z-index: 2;
+}
 html::-webkit-scrollbar-track{
     /* background: none !important; */
     /* -webkit-box-shadow: none; */

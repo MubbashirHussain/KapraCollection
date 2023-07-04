@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
 import { getDatabase, ref as dbRef, onValue, set as dbset, update as dbUpdate, push as dbpush  ,remove as dbremove} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged ,sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+import { getStorage , uploadBytesResumable , getDownloadURL , ref as StoreRef} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-storage.js";
 const firebaseConfig = {
   apiKey: "AIzaSyA4nH4_anE2tXfuKc3SQsecAMfCQEGyjsU",
   authDomain: "kapra-collection.firebaseapp.com",
@@ -16,4 +17,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth(app);
-export { db, dbRef, onValue,dbset, dbUpdate, dbremove , dbpush, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged ,sendPasswordResetEmail}
+const Storage = getStorage(app);
+
+export { db, dbRef, onValue,dbset, dbUpdate, dbremove , Storage , uploadBytesResumable,getDownloadURL , StoreRef ,dbpush, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged ,sendPasswordResetEmail}
