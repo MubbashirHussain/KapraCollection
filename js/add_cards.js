@@ -252,7 +252,6 @@ const Create_main_card_editer_Modal = () => {
         })
     })
     Drop_box_input.addEventListener("change", e => {
-        console.log(e.target.files[0])
         e.preventDefault()
         e.stopPropagation()
         let DraggedData = e.target;
@@ -287,7 +286,7 @@ const Create_main_card_editer_Modal = () => {
         Card_tag_box.append(tag_for_card)
         Card_tag_data.push(tag.value)
         tag.value = ""
-        console.log(tag.value)
+        // console.log(tag.value)
 
     }
     Card_tag_btn.addEventListener("click", AddTagIntoCard)
@@ -301,14 +300,16 @@ const Create_modal_bg = () => {
 
 // let Data_array = []
 let Card_created  = async (forntIMG, AllImg, Card_title, description, discount, price, tag, card_id) => {
-    console.log(forntIMG)
-    console.log(AllImg)
-
+    // console.log(forntIMG)
+    // console.log(AllImg)
+    let dBRef = dbpush(dbRef(db , "Products/"))
+    const new_key = dBRef.key
 
 let uploadfile = (file) => {
     return new Promise((resolve, reject) => {
-      console.log(file);
-      const storageRef = StoreRef(Storage, `images/${file.name}`);
+        let extension = file.name.split('.')[1]
+        let name = file.name.split('.')[0]
+        const storageRef = StoreRef(Storage, `images/${name}->${new_key}.${extension}`);
       const uploadTask = uploadBytesResumable(storageRef, file);
       uploadTask.on(
         "state_changed",
@@ -339,7 +340,7 @@ let uploadfile = (file) => {
   };
     
   let ALL_IMAGES = []
-  console.log(AllImg)
+//   console.log(AllImg)
 for (let i = 0; i < AllImg.length; i++) {
     let Al_Img   = await uploadfile(AllImg[i])
     ALL_IMAGES.push(Al_Img)
@@ -347,11 +348,8 @@ for (let i = 0; i < AllImg.length; i++) {
 
 
  let fonTimg  = await uploadfile(forntIMG)
-
-
-
- let dBRef = dbpush(dbRef(db , "Products/"))
-
+//  console.log(fonTimg)
+//  console.log(ALL_IMAGES)
 
 
     let Card_data = {
@@ -363,9 +361,9 @@ for (let i = 0; i < AllImg.length; i++) {
         Card_Price: price.innerText,
         Card_Tags: tag,
         Card_id_no: card_id,
-        id: dBRef.key
+        id: new_key
     }
-    console.log(Card_data)
+    // console.log(Card_data)
     dbset(dBRef , Card_data)
 
 

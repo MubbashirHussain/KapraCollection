@@ -42,15 +42,19 @@ const Page_container =document.querySelector('.Page_container'),
 
 
 page_change_btn.onclick = ()=>{
-      Login_page.classList.toggle("active")
-      Signup_page.classList.toggle("active")
+  Login_page.classList.toggle("hide")
+  Signup_page.classList.toggle("hide")
+  setTimeout(() => {
+        Login_page.classList.toggle("active")
+        Signup_page.classList.toggle("active")
+      }, 0);
       page_change_btn.querySelector('i').classList.toggle("left")
 }
 
 window.User_signup =()=>{
   createUserWithEmailAndPassword(auth , Signup_Email_input.value , Signup_pasword_input.value)
   .then(userData=>{
-    console.log(userData.user.uid)
+    // console.log(userData.user.uid)
   }).catch(error=>{
     Signup_errorBox.innerHTML = error.message
   })
@@ -59,7 +63,7 @@ window.User_signup =()=>{
 window.User_login=()=>{
   signInWithEmailAndPassword(auth , login_name_input.value , login_password_input.value)
   .then(userData =>{
-    console.log(userData.user)
+    // console.log(userData.user)
   })
   .catch(error=>{
     login_errorBox.innerHTML = error.message

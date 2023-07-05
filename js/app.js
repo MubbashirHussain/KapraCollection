@@ -70,6 +70,6 @@ window.Open_big_card = (card) => {
     window.location.pathname = "pages/card.html"
     let daa = []
     daa.push(card)
-    console.log(daa)
+    // console.log(daa)
     localStorage.setItem("card", JSON.stringify(daa))
 }

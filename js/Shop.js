@@ -9,8 +9,8 @@ onValue(starCountRef, (snapshot) => {
 const Product_card_container = document.querySelector('.Product_card_container'),
     SearchInput = document.querySelector('.SearchInput'),
     pagination_box = document.querySelector(".pagination_box ul")
-let data_for_render = [], data_for_search = [], emtpyAara = [], pageIndex = 0, ArrData = [];
-let page = 4;
+let data_for_render = [], data_for_search = [], emtpyAara = [], pageIndex = 2, ArrData = [];
+let page = pageIndex + 1;
 let totalPages;
 SearchInput.disabled = true
 const Card_Crating = (data) => {
@@ -21,8 +21,8 @@ const Card_Crating = (data) => {
     SearchInput.disabled = false
 
     let data_divid_for_paging = (AaraData, retara) => {
-        for (let i = 0; i < AaraData.length; i += 15) {
-            let DP = AaraData.slice(i, i + 15);
+        for (let i = 0; i < AaraData.length; i += 9) {
+            let DP = AaraData.slice(i, i + 9);
             retara.push(DP);
         }
     };
@@ -37,7 +37,7 @@ const Card_Crating = (data) => {
         if (IntupValue.length <= 0) {
             data_for_render = data_for_search;
             Rendering_card(data_for_render);
-            page_no(data_for_render.length, 4);
+            page_no(data_for_render.length, page);
         }
         if (IntupValue.length < 1) return;
         data_for_render = [];

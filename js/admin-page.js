@@ -3,30 +3,30 @@ import { auth, signInWithEmailAndPassword, onAuthStateChanged, dbremove, signOut
 let Dref = dbRef(db, 'Admin/')
 onValue(Dref, (snap) => {
     let data = Object.values(snap.val())
-    //   checkforAdminpage(data, undefined)
+      checkforAdminpage(data, undefined)
 })
 
 
-// window.checkforAdminpage = (data, Logger) => {
-//   if (Logger != undefined) {
-//     for (let i = 0; i < data.length; i++) {
-//       if (data[i].Admin_uid == Logger.uid) {
-//         document.body.style.display ="block"
-//       }
-//     }
-//   }else{
-//     onAuthStateChanged(auth, (user) => {
-//       if (user) {
-//         checkforAdminpage(data, user)
-//       }else{
-//         window.location.pathname = "pages/admin-login.html"
-//       }
-//     })
+window.checkforAdminpage = (data, Logger) => {
+  if (Logger != undefined) {
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].Admin_uid == Logger.uid) {
+        document.body.style.display ="block"
+      }
+    }
+  }else{
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        checkforAdminpage(data, user)
+      }else{
+        window.location.pathname = "pages/admin-login.html"
+      }
+    })
 
-//   }
+  }
 
-// }
-
+}
+let navbar_toggler = document.querySelector('.navbar-toggler')
 let Card_tag_data = [];
 const Admin_sidebar_ul = document.querySelector('.Admin_sidebar_ul'),
     Admin_pages_view = document.querySelector('.Admin_pages_view'),
@@ -338,7 +338,7 @@ admin_ul_li.forEach((li) => {
 })
 
 li_admin_dashborad.addEventListener("click", () => {
-
+    navbar_toggler.click()
     admin_dashborad.classList.remove("hide")
     admin_Home.classList.add("hide")
     admin_Shop.classList.add("hide")
@@ -347,7 +347,7 @@ li_admin_dashborad.addEventListener("click", () => {
 
 })
 li_admin_Home.addEventListener("click", () => {
-
+    navbar_toggler.click()
     admin_dashborad.classList.add("hide")
     admin_Home.classList.remove("hide")
     admin_Shop.classList.add("hide")
@@ -356,7 +356,7 @@ li_admin_Home.addEventListener("click", () => {
 
 })
 li_admin_Shop.addEventListener("click", () => {
-
+    navbar_toggler.click()
     admin_dashborad.classList.add("hide")
     admin_Home.classList.add("hide")
     admin_Shop.classList.remove("hide")
@@ -365,7 +365,7 @@ li_admin_Shop.addEventListener("click", () => {
 
 })
 li_admin_Signup.addEventListener("click", () => {
-
+    navbar_toggler.click()
     admin_dashborad.classList.add("hide")
     admin_Home.classList.add("hide")
     admin_Shop.classList.add("hide")
@@ -374,7 +374,7 @@ li_admin_Signup.addEventListener("click", () => {
 
 })
 li_admin_preview.addEventListener("click", () => {
-
+    navbar_toggler.click()
     admin_dashborad.classList.add("hide")
     admin_Home.classList.add("hide")
     admin_Shop.classList.add("hide")

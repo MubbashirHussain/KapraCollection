@@ -83,6 +83,11 @@ width: 100%;
     flex-direction: column;
     padding: 8px 0;
 }
+.iban{
+  text-overflow: ellipsis; /* enables ellipsis */
+  white-space: nowrap; /* keeps the text in a single line */
+  overflow: hidden;
+}
 .Card_tag_box::-webkit-scrollbar{appearance: none;}
 .Card_tag_box span{
     word-wrap: break-word;
@@ -139,7 +144,9 @@ width: 100%;
     border: 1px dashed;
     height: 200px;
 }
-
+.cursor-pointer{
+  cursor: pointer;
+}
 .input_reset:focus{
     box-shadow: none !important;
 }
@@ -181,6 +188,9 @@ width: 100%;
 }
 .overflow-hidden{
   overflow: hidden;
+}
+.overflow-hidden-y{
+  overflow-y: hidden;
 }
 
 .object_fit_cover{
@@ -448,11 +458,6 @@ opacity: 0.3;}
 @media (max-width:576px) { /* small window */
   .open_side_bar_anim{
     width: 100%;
-  }
-  .Quick_link , .Quick_link :first-child{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
   .Page_container{
     margin: 50px;

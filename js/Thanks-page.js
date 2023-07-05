@@ -3,6 +3,13 @@ if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
     localStorage.removeItem("place_order")
   }
 
+  
+let iban = document.querySelector(".iban")
+iban.parentElement.addEventListener("click",()=>{
+    navigator.clipboard.writeText(iban.innerText)
+    alert(`IBAN : ${iban.innerText} \n has copyed on clipboard`)
+})
+let WhatAPP_link = document.querySelector(".WhatAPP_link")
 let Order_details = document.querySelector('.Order_details'),
     order_id = Order_details.querySelector('.order_id'),
     Total_Rs = Order_details.querySelector('.Total_Rs'),
@@ -14,7 +21,7 @@ let Order_details = document.querySelector('.Order_details'),
 
     
 const Show_data=()=>{
-    console.log(LS_order)
+    // console.log(LS_order)
         if(LS_order != undefined){
             if(LS_order[2] == "COD"){
                 Bank_Transfer.classList.add("hide")
@@ -26,6 +33,8 @@ const Show_data=()=>{
             order_id.innerHTML = LS_order[0]        
             Total_Rs.innerHTML = LS_order[1]        
             Payment_method.innerHTML = LS_order[2]
+            WhatAPP_link.href = `https://wa.me/+923062969491?text=*_My Order ID_* ( ${LS_order[0]} ) *_Total Bill_* Rs : ${Number(LS_order[1]).toLocaleString("PKR")}`
+
         } 
 
 }

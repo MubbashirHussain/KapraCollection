@@ -26,7 +26,7 @@ const show_cart_details =()=>{
         `
         Cart_details_box_inner.insertBefore(Prod,Cart_details_box_inner.children[2])
         Subtotal =  parseInt(Subtotal) + parseInt(LS_items[i].Card_Price * LS_items[i].quantity)
-        console.log(Subtotal)
+        // console.log(Subtotal)
         
     }
     Check_Subtotal_products.innerHTML = (parseInt(Subtotal)).toLocaleString("PKR")
@@ -54,7 +54,7 @@ Order_details.forEach(element => {
 
 Place_order_btn.addEventListener('click',()=>{
 for (let i = 0; i < Order_details.length; i++) {
-    console.log(Order_details[i].required) 
+    // console.log(Order_details[i].required) 
     if(Order_details[i].value.length  < 1 && Order_details[i].required) {
         Order_details[i].style.boxShadow = "0 0 0 1px red "
         return
@@ -91,7 +91,7 @@ let oredr_ref =  dbpush(dbRef(db ,'Order/'))
             Post_code : Order_details[8].value,
             Order_notes : Order_details[9].value,
         } 
-        console.log(input_obj)
+        // console.log(input_obj)
         let Order_card_details = {
             ordered_cards : JSON.stringify(arra),
             Order_key : oredr_ref.key,

@@ -46,7 +46,7 @@ const cartBOX_total = ()=>{
     Cart_sub_total_value = 0
     for (let i = 0; i < LS_items.length; i++) {
         Cart_sub_total_value = Cart_sub_total_value + (LS_items[i].Card_Price * LS_items[i].quantity)
-        console.log(Cart_sub_total_value)
+        // console.log(Cart_sub_total_value)
     }
     Cart_sub_total.innerHTML = Cart_sub_total_value.toLocaleString('PKR')
     Cart_total.innerHTML = (parseInt(Shipping_charges) + parseInt(Cart_sub_total_value)).toLocaleString("PKR")
@@ -72,10 +72,10 @@ const Creating_cart_products =()=>{
             localStorage.setItem("cart_items", JSON.stringify(LS_items))
         }
         let quantity_input =  tr.querySelector('.quantity_input')
-        console.log(quantity_input.value)
+        // console.log(quantity_input.value)
         quantity_input.addEventListener('input',(e)=>{
             
-            console.log(quantity_input.value)
+            // console.log(quantity_input.value)
             LS_items[i].quantity = quantity_input.value
             localStorage.setItem("cart_items", JSON.stringify(LS_items))
         })
@@ -91,7 +91,7 @@ Update_btn.onclick =()=>{
 Creating_cart_products()
 
 
-console.log(Cart_sub_total_value)
+// console.log(Cart_sub_total_value)
 
 
 

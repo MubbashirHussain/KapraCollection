@@ -68,13 +68,13 @@ const Page_container = document.querySelector('.Page_container'),
 
 window.checkingAdmin = (data) => {
   window.Admin_login = () => {
-    console.log(data)
+    // console.log(data)
     for (let i = 0; i < data.length; i++) {
       if (data[i].Admin_email == Email_input.value) {
         flag = true;
       }
     }
-    console.log(flag)
+    // console.log(flag)
     if(flag){
       signInWithEmailAndPassword(auth, Email_input.value, Password_input.value)
       .then((AdimData) => {
