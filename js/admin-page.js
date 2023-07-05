@@ -150,7 +150,7 @@ const Rendering_card = (Data_for_Render, CARD_area, CARD_click_func, main_data, 
         }
         let allCard = CARD_area.querySelectorAll('.card_parent')
         allCard.forEach(elm => {
-            elm.addEventListener("dblclick", () => {
+           let dbl =  () => {
                 let click_id = elm.querySelector('.card_id').innerText.split("#").join("")
                 for (let j = 0; j < Data_for_Render.length; j++) {
                     if (Data_for_Render[j].Card_id_no == click_id) {
@@ -158,7 +158,8 @@ const Rendering_card = (Data_for_Render, CARD_area, CARD_click_func, main_data, 
                         CARD_click_func(Data_for_Render[j], main_data)
                     }
                 }
-            })
+            }
+            elm.addEventListener("dblclick",dbl)
         })
     }
 }
@@ -175,6 +176,7 @@ const Edit_card_function = (one_card, main_data) => {
         modal_bg.classList.remove('modal_bg_on')
         document.body.classList.remove("stop-scrolling")
     }
+    console.log(Number(one_card.Card_Discounted_price.split(":")[1]))
     modal.innerHTML = ''
     modal.innerHTML = `
     <div class="d-flex row justify-content-between align-items-center p-3 w-100 "><h2 class="fw-bolder w-25 m-0">Card Edit</h2><span class="Modal_close_btn  fs-1 px-2"  style="width: fit-content;">&#215;</span></div>
@@ -196,7 +198,7 @@ const Edit_card_function = (one_card, main_data) => {
                    <span></span>
                  </div>
                  <div class="text writing">
-                     <input type="number" id="Card_discounted_price" value="${one_card.Card_Discounted_price}"/>
+                     <input type="number" id="Card_discounted_price" value="${Number(one_card.Card_Discounted_price.split(":")[1])}"/>
                        <label for="Card_discounted_price" class=" fw-bold">Card discounted price</label>
                          <span></span>
                  </div>
@@ -254,7 +256,6 @@ const Edit_card_function = (one_card, main_data) => {
         tag_for_card.innerHTML = tag.value
         one_card.Card_Tags.push(tag.value)
         tag.value = ""
-        // console.log(tag.value)
     }
 
     window.update_card_obj = () => {
@@ -262,7 +263,10 @@ const Edit_card_function = (one_card, main_data) => {
         let Card_Title = modal.querySelector('#Card_Title').value
         let Card_Description = modal.querySelector('#Card_Description').value
         let Card_discounted_price = modal.querySelector('#Card_discounted_price').value
+        Card_discounted_price = `Rs : ${Card_discounted_price}`
         let Card_price = modal.querySelector('#Card_price').value
+
+
         let obj_for_update = {
             Card_title: Card_Title,
             Card_Description: Card_Description,

@@ -18,7 +18,7 @@ let Order_details = document.querySelector('.Order_details'),
     COD = document.querySelector("#COD")
 
     let LS_order = JSON.parse(localStorage.getItem('place_order'))
-
+    
     
 const Show_data=()=>{
     // console.log(LS_order)
@@ -30,11 +30,14 @@ const Show_data=()=>{
                 COD.classList.add("hide")
                 Bank_Transfer.classList.remove("hide")
             }
-            order_id.innerHTML = LS_order[0]        
+            order_id.innerHTML = LS_order[0]
+            order_id.onclick=()=>{navigator.clipboard.writeText(LS_order[0]) , alert(`Order ID : ${LS_order[0]} \n has copyed on clipboard`)}    
+            order_id.title = "Click to copy ID "    
             Total_Rs.innerHTML = LS_order[1]        
             Payment_method.innerHTML = LS_order[2]
-            WhatAPP_link.href = `https://wa.me/+923062969491?text=*_My Order ID_* ( ${LS_order[0]} ) *_Total Bill_* Rs : ${Number(LS_order[1]).toLocaleString("PKR")}`
-
+            WhatAPP_link.onclick=()=>{
+                window.open(`https://wa.me/+923062969491?text=*_My Order ID_* ( ${LS_order[0]} ) *_Total Bill_* Rs : ${Number(LS_order[1]).toLocaleString("PKR")}` , "_blank")
+            }
         } 
 
 }
