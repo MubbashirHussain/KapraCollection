@@ -21,18 +21,18 @@ body{
   z-index: 2;
 }
 html::-webkit-scrollbar-track{
-    /* background: none !important; */
-    /* -webkit-box-shadow: none; */
+    background: none !important;
+    -webkit-box-shadow: none;
     
 }
 html::-webkit-scrollbar-thumb{
-    /* background: #0000003b;
-    border-radius: 10px; */
+    background: #0000003b;
+    border-radius: 10px;
     
 }
 html::-webkit-scrollbar{
-    /* width: 7px; */
-    /* background: none !important; */
+    width: 7px;
+    background: none !important;
 
 }
 html ::-webkit-scrollbar{
