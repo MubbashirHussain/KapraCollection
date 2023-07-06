@@ -426,7 +426,7 @@ const creating_order_data_deshborad = (data) => {
         </tr>
             </tfoot>
         `
-        let orderS = JSON.parse(data[0].Order_details.ordered_cards);
+        let orderS = JSON.parse(data[i].Order_details.ordered_cards);
         // console.log(orderS)
         let tbody = table.querySelector("tbody")
         tbody.innerHTML = ""
