@@ -1,7 +1,7 @@
-if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
     localStorage.removeItem("cart_items")
-    localStorage.removeItem("place_order")
-  }
+// if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+//     localStorage.removeItem("place_order")
+//   }
 
   
 let iban = document.querySelector(".iban")
