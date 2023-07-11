@@ -1,4 +1,4 @@
-import { dbremove, db, dbRef, dbset, onValue, dbUpdate ,Storage , StoreRef ,uploadBytesResumable , getDownloadURL, dbpush} from "../js/firebase.js";
+import { dbremove, db, dbRef, dbset, onValue, dbUpdate, dbpush  , Storage, StoreRef, uploadBytesResumable, getDownloadURL, deleteObject} from "../js/firebase.js";
 
 
 
@@ -14,7 +14,7 @@ const Create_main_card_editer_Modal = () => {
     <div class="col-md-6 col-sm-12  Card_Edit_container h-100 d-flex  justify-content-center align-items-center ">
         
         <div class="Card_Crop_img_box border w-100 d-flex justify-content-center align-items-center Drop_box ">
-            <input type="file" id="Crop_Img_Upload" hidden>
+            <input type="file" id="Crop_Img_Upload" multiple hidden>
             <label for="Crop_Img_Upload" class="py-1 px-2 text-white bg-info rounded"> Upload image </label>
         </div>
         <div class="container Selete_For_frot_img py-2 px1 d-flex flex-column justify-content-center align-items-center hide">
@@ -88,7 +88,7 @@ const Create_main_card_editer_Modal = () => {
     </div>
 </div>
      `
-    let cropper, Card_tag_data = [], All_Images_For_Card = [], selected_img , MAX_id_no = [] 
+    let cropper, Card_tag_data = [], All_Images_For_Card = [], selected_img, MAX_id_no = []
     const Card_edit_Data = main_card_editer_Modal.querySelectorAll(".data_for_card input , textarea"),
         Card_preview_container = main_card_editer_Modal.querySelector('.Card_preview_container'),
         Card_Edit_container = main_card_editer_Modal.querySelector('.Card_Edit_container'),
@@ -114,29 +114,29 @@ const Create_main_card_editer_Modal = () => {
 
     main_card_editer_Modal.querySelectorAll('.writing :is(input , textarea)').forEach(writinginput => {
         writinginput.addEventListener('input', () => {
-          if (writinginput.value.trim() !== '') {
-            writinginput.classList.add('has-text');
-          } else {
-            writinginput.classList.remove('has-text');
-          }
+            if (writinginput.value.trim() !== '') {
+                writinginput.classList.add('has-text');
+            } else {
+                writinginput.classList.remove('has-text');
+            }
         });
-      });
-      
-      
-      /* Alto de textarea */
-      main_card_editer_Modal.querySelectorAll('.textarea textarea').forEach(textarea => {
+    });
+
+
+    /* Alto de textarea */
+    main_card_editer_Modal.querySelectorAll('.textarea textarea').forEach(textarea => {
         textarea.addEventListener('input', () => {
-          textarea.style.height = '1em';
-          const scrollHeight = textarea.scrollHeight;
-          textarea.style.height = `${scrollHeight}px`;
+            textarea.style.height = '1em';
+            const scrollHeight = textarea.scrollHeight;
+            textarea.style.height = `${scrollHeight}px`;
         });
-      });
+    });
 
 
 
     const Card_input_preview = (e) => {
         if (e.target.id == "Card_Title") { Card_Title.innerHTML = `${e.target.value}` }
-        if (e.target.id == "Card_Description") { Card_Description.innerText = `${e.target.value}`}
+        if (e.target.id == "Card_Description") { Card_Description.innerText = `${e.target.value}` }
         if (e.target.id == "Card_price") { Product_price.innerHTML = `${e.target.value}` }
         if (e.target.id == "Card_discounted_price") {
             Card_discounted_price.innerHTML = `${(e.target.value.length <= 0) ? Card_discounted_price.innerHTML = "" : 'Rs :' + e.target.value}`
@@ -147,19 +147,37 @@ const Create_main_card_editer_Modal = () => {
         element.addEventListener("keyup", Card_input_preview)
         element.addEventListener("change", Card_input_preview)
     });
+    window.checkFileSize = (Files, file_name, type) => {
+        if (type.split('/')[0] !== "image") return;
+        if (Number((Files.size / 1000).toFixed(1)) > 100) {
+            Drop_box.classList.add("hide")
+            Selete_For_frot_img.classList.remove("hide")
+            new Compressor(Files, {
+                quality: 0.4,
+                width: 500,
+                heigth: 500,
+                success(result) {
+                    let FL = new File([result], result.name, { type: result.type })
+                    fileHandle(FL, FL.name, FL.type)
+                },
+                error(err) {
+                    console.log(err)
+                }
+            })
+        } else {
+            fileHandle(Files, file_name, type)
+        }
+
+    }
 
     const fileHandle = (file, File_name, type) => {
         if (type.split('/')[0] !== "image") return;
-        Drop_box.classList.add("hide")
-        Selete_For_frot_img.classList.remove("hide")
         All_Images_For_Card.push(file)
-
         let F_reader = new FileReader()
         F_reader.readAsDataURL(file)
         F_reader.onloadend = () => {
-        selecting_img_Area.innerHTML +=
+            selecting_img_Area.innerHTML +=
                 `<img class="rounded p-3 SelectedImg" src="${F_reader.result}" style="height: 200px; width: 200px; object-fit: cover;">`
-
             selected_img = selecting_img_Area.querySelectorAll('.SelectedImg');
 
             selected_img.forEach(elm => {
@@ -206,7 +224,6 @@ const Create_main_card_editer_Modal = () => {
         Card_data.classList.remove("hide")
     })
     Btn_box_btn_back.addEventListener('click', () => {
-        // cropper.destroy();
         img_croping_area.classList.add("hide")
         Drop_box.classList.remove("hide")
     })
@@ -218,18 +235,18 @@ const Create_main_card_editer_Modal = () => {
         main_card_editer_Modal.classList.add("hide")
         document.querySelector('.modal_bg_on').classList.add('hide')
         cropper.getCroppedCanvas().toBlob((blob) => {
-                 let im =  new File([blob], "image" , {type : blob.type})
+            let im = new File([blob], "image", { type: blob.type })
 
-                let Ref = dbRef(db , "Products/")
-                onValue(Ref , (snap)=>{
-                    let data = Object.values(snap.val())
-                    for (let i = 0; i < data.length; i++) {
-                        MAX_id_no.push(data[i].Card_id_no)
-                    }
-                })
-                let ID_no  = Math.max(...MAX_id_no) + 1;
-                Card_created(im, All_Images_For_Card, Card_Title, Card_Description, Card_discounted_price, Product_price, Card_tag_data, ID_no)
-                
+            let Ref = dbRef(db, "Products/")
+            onValue(Ref, (snap) => {
+                let data = Object.values(snap.val())
+                for (let i = 0; i < data.length; i++) {
+                    MAX_id_no.push(data[i].Card_id_no)
+                }
+            })
+            let ID_no = Math.max(...MAX_id_no) + 1;
+            Card_created(im, All_Images_For_Card, Card_Title, Card_Description, Card_discounted_price, Product_price, Card_tag_data, ID_no)
+
         })
     })
     Drop_box.addEventListener("dragenter", e => {
@@ -248,7 +265,7 @@ const Create_main_card_editer_Modal = () => {
         let DraggedData = e.dataTransfer;
         let Files = DraggedData.files;
         Array.from(Files).forEach((file) => {
-            fileHandle(file, file.name, file.type)
+            checkFileSize(file, file.name, file.type)
         })
     })
     Drop_box_input.addEventListener("change", e => {
@@ -257,7 +274,7 @@ const Create_main_card_editer_Modal = () => {
         let DraggedData = e.target;
         let Files = DraggedData.files;
         Array.from(Files).forEach((file) => {
-            fileHandle(file, file.name, file.type)
+            checkFileSize(file, file.name, file.type)
         })
     })
 
@@ -299,57 +316,57 @@ const Create_modal_bg = () => {
 }
 
 // let Data_array = []
-let Card_created  = async (forntIMG, AllImg, Card_title, description, discount, price, tag, card_id) => {
+let Card_created = async (forntIMG, AllImg, Card_title, description, discount, price, tag, card_id) => {
     // console.log(forntIMG)
     // console.log(AllImg)
-    let dBRef = dbpush(dbRef(db , "Products/"))
+    let dBRef = dbpush(dbRef(db, "Products/"))
     const new_key = dBRef.key
 
-let uploadfile = (file) => {
-    return new Promise((resolve, reject) => {
-        let extension = file.name.split('.')[1]
-        let name = file.name.split('.')[0]
-        const storageRef = StoreRef(Storage, `images/${name}->${new_key}.${extension}`);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
-          switch (snapshot.state) {
-            case "paused":
-              console.log("Upload is paused");
-              break;
-            case "running":
-              console.log("Upload is running");
-              break;
-          }
-        },
-        (error) => {
-          reject(error);
-          console.log(error);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            resolve(downloadURL);
-          });
-        }
-      );
-    });
-  };
-    
-  let ALL_IMAGES = []
-//   console.log(AllImg)
-for (let i = 0; i < AllImg.length; i++) {
-    let Al_Img   = await uploadfile(AllImg[i])
-    ALL_IMAGES.push(Al_Img)
-}
+    let uploadfile = (file) => {
+        return new Promise((resolve, reject) => {
+            let extension = file.name.split('.')[1]
+            let name = file.name.split('.')[0]
+            const storageRef = StoreRef(Storage, `images/${name}->${new_key}.${extension}`);
+            const uploadTask = uploadBytesResumable(storageRef, file);
+            uploadTask.on(
+                "state_changed",
+                (snapshot) => {
+                    const progress =
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log("Upload is " + progress + "% done");
+                    switch (snapshot.state) {
+                        case "paused":
+                            console.log("Upload is paused");
+                            break;
+                        case "running":
+                            console.log("Upload is running");
+                            break;
+                    }
+                },
+                (error) => {
+                    reject(error);
+                    console.log(error);
+                },
+                () => {
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                        resolve(downloadURL);
+                    });
+                }
+            );
+        });
+    };
+
+    let ALL_IMAGES = []
+    //   console.log(AllImg)
+    for (let i = 0; i < AllImg.length; i++) {
+        let Al_Img = await uploadfile(AllImg[i])
+        ALL_IMAGES.push(Al_Img)
+    }
 
 
- let fonTimg  = await uploadfile(forntIMG)
-//  console.log(fonTimg)
-//  console.log(ALL_IMAGES)
+    let fonTimg = await uploadfile(forntIMG)
+    //  console.log(fonTimg)
+    //  console.log(ALL_IMAGES)
 
 
     let Card_data = {
@@ -364,7 +381,7 @@ for (let i = 0; i < AllImg.length; i++) {
         id: new_key
     }
     // console.log(Card_data)
-    dbset(dBRef , Card_data)
+    dbset(dBRef, Card_data)
 
 
 }

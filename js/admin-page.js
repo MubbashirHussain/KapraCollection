@@ -1,29 +1,29 @@
-import { auth, signInWithEmailAndPassword, onAuthStateChanged, dbremove, signOut, db, dbRef, dbset, onValue, dbUpdate } from "../js/firebase.js";
+import { auth, signInWithEmailAndPassword, onAuthStateChanged, dbremove, signOut, db, dbRef, dbset, onValue, dbUpdate, Storage, StoreRef, uploadBytesResumable, getDownloadURL, deleteObject } from "../js/firebase.js";
 
 let Dref = dbRef(db, 'Admin/')
 onValue(Dref, (snap) => {
     let data = Object.values(snap.val())
-      checkforAdminpage(data, undefined)
+    checkforAdminpage(data, undefined)
 })
 
 
 window.checkforAdminpage = (data, Logger) => {
-  if (Logger != undefined) {
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].Admin_uid == Logger.uid) {
-        document.body.style.display ="block"
-      }
-    }
-  }else{
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        checkforAdminpage(data, user)
-      }else{
-        window.location.pathname = "pages/admin-login.html"
-      }
-    })
+    if (Logger != undefined) {
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].Admin_uid == Logger.uid) {
+                document.body.style.display = "block"
+            }
+        }
+    } else {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                checkforAdminpage(data, user)
+            } else {
+                window.location.pathname = "pages/admin-login.html"
+            }
+        })
 
-  }
+    }
 
 }
 let navbar_toggler = document.querySelector('.navbar-toggler')
@@ -150,7 +150,7 @@ const Rendering_card = (Data_for_Render, CARD_area, CARD_click_func, main_data, 
         }
         let allCard = CARD_area.querySelectorAll('.card_parent')
         allCard.forEach(elm => {
-           let dbl =  () => {
+            let dbl = () => {
                 let click_id = elm.querySelector('.card_id').innerText.split("#").join("")
                 for (let j = 0; j < Data_for_Render.length; j++) {
                     if (Data_for_Render[j].Card_id_no == click_id) {
@@ -159,7 +159,7 @@ const Rendering_card = (Data_for_Render, CARD_area, CARD_click_func, main_data, 
                     }
                 }
             }
-            elm.addEventListener("dblclick",dbl)
+            elm.addEventListener("dblclick", dbl)
         })
     }
 }
@@ -319,6 +319,14 @@ window.delete_card = (card_data, main_data) => {
     if (card_data != undefined && main_data != undefined) {
         let key = card_data.id;
         if (card_data.Card_id_no === main_data[key].Card_id_no) {
+            let Pre_del_img = (card_data.Card_preivew_img).split("/images%2F")[1].split("?")[0].split("%3E").join('>')
+            let DeleteREF = StoreRef(Storage , `images/${Pre_del_img}`)
+            deleteObject(DeleteREF).then( _ =>{console.log("File Deleted")}).catch(e=>{console.log(e)})
+            for (let i = 0; i < card_data.Card_all_imgs.length; i++) {
+                let IMG_key = (card_data.Card_all_imgs[i]).split("/images%2F")[1].split("?")[0].split("%3E").join('>')
+                let DeleteREF = StoreRef(Storage , `images/${IMG_key}`)
+                deleteObject(DeleteREF).then(r =>{console.log("File Deleted")}).catch(e=>{console.log(e)})
+            }
             let UpRef = dbRef(db, `Products/${key}`)
             dbremove(UpRef)
             window.location.reload()
@@ -397,7 +405,7 @@ onValue(order_ref, (snap) => {
 })
 
 const creating_order_data_deshborad = (data) => {
-    if(data == undefined || data.length < 1) {
+    if (data == undefined || data.length < 1) {
         table_container.innerHTML = `
         <h1> No Orders 😕</h1>
         `
@@ -441,7 +449,7 @@ const creating_order_data_deshborad = (data) => {
                     <td>#${orderS[j].card_id_no}</td>
                 </tr>    
             `
-            subtotal =  parseInt(subtotal) + parseInt(orderS[j].price) * parseInt(orderS[j].quantity).toLocaleString("PKR")
+            subtotal = parseInt(subtotal) + parseInt(orderS[j].price) * parseInt(orderS[j].quantity).toLocaleString("PKR")
         }
         table.querySelector('tfoot').querySelector('.Total_order').innerHTML = subtotal
         let Show_customer = table.querySelector('.Show_customer')
@@ -481,17 +489,17 @@ window.Render_completed_orders = (modal) => {
         // let OrderedCARD;
         for (let i = 0; i < data.length; i++) {
             modal.style.alignContent = "flex-start"
-            let ul  =  document.createElement('ul')
+            let ul = document.createElement('ul')
             ul.className = "w-100 border CUS bg-light border-dark m-3 rounded"
             ul.style.width = "calc(100% - 50px)"
-            ul.style.height= "fit-content"
+            ul.style.height = "fit-content"
             ul.innerHTML = `<li class="marker p-2 w-100"><strong> Customer Name :</strong>  ${data[i].Customer_details.First_name}  <strong>Order Key :</strong> ${data[i].Order_details.Order_key}  </li>`
             let OrderedCARD = JSON.parse(data[i].Order_details.ordered_cards)
             for (let j = 0; j < OrderedCARD.length; j++) {
                 ul.innerHTML += `
                 <li class="marker p-2"> <strong>Product :</strong>  ${OrderedCARD[j].Product} <strong> Price :</strong> ${OrderedCARD[j].price} X${OrderedCARD[j].quantity}</li>
              `}
-             modal.append(ul)
+            modal.append(ul)
         }
     })
 }
