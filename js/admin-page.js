@@ -26,6 +26,21 @@ window.checkforAdminpage = (data, Logger) => {
     }
 
 }
+
+if(Notification.permission == "default" || Notification.permission == "denied"){
+    console.log(window.Notification.requestPermission().then(r =>{
+        console.log(r)
+        if(r == "granted"){
+            new Notification("Now you get notified By web 😊" , {
+                body:"You Get the Order And etc. , updates , Order notifications",
+                icon: "../images/kapraCollectionLogo.png"
+            })
+
+        }else if(r == "denied" || "default"){
+            alert("if you are admin U must to Allow notification for getting Order notifcations etc.\n")
+        }
+    }))
+}
 let navbar_toggler = document.querySelector('.navbar-toggler')
 let Card_tag_data = [];
 const Admin_sidebar_ul = document.querySelector('.Admin_sidebar_ul'),

@@ -142,6 +142,10 @@ width: 100%;
 }
 
 .img-preview{overflow: hidden;}
+/* .img-preview img{
+  width: 300px !important;
+  height: 255px !important;
+} */
 .main_card_editer .Drop_box{
     border: 1px dashed;
     height: 200px;

@@ -14,7 +14,7 @@ const Create_main_card_editer_Modal = () => {
     <div class="col-md-6 col-sm-12  Card_Edit_container h-100 d-flex  justify-content-center align-items-center ">
         
         <div class="Card_Crop_img_box border w-100 d-flex justify-content-center align-items-center Drop_box ">
-            <input type="file" id="Crop_Img_Upload" multiple hidden>
+            <input type="file" id="Crop_Img_Upload" multiple hidden  accept="image/*"> 
             <label for="Crop_Img_Upload" class="py-1 px-2 text-white bg-info rounded"> Upload image </label>
         </div>
         <div class="container Selete_For_frot_img py-2 px1 d-flex flex-column justify-content-center align-items-center hide">
@@ -88,12 +88,13 @@ const Create_main_card_editer_Modal = () => {
     </div>
 </div>
      `
-    let cropper, Card_tag_data = [], All_Images_For_Card = [], selected_img, MAX_id_no = []
+    let cropper, cropper_blob = [], Card_tag_data = [], All_Images_For_Card = [], selected_img, MAX_id_no = []
     const Card_edit_Data = main_card_editer_Modal.querySelectorAll(".data_for_card input , textarea"),
         Card_preview_container = main_card_editer_Modal.querySelector('.Card_preview_container'),
         Card_Edit_container = main_card_editer_Modal.querySelector('.Card_Edit_container'),
         Card_Title = Card_preview_container.querySelector('.card-title'),
         Card_id_no = Card_preview_container.querySelector('.Card_id_no'),
+        img_preview = Card_preview_container.querySelector('.img-preview'),
         Card_Description = Card_preview_container.querySelector('.Card_Description'),
         Product_price = Card_preview_container.querySelector('.Product_price'),
         Card_discounted_price = Card_preview_container.querySelector('.Discounted_price'),
@@ -221,6 +222,30 @@ const Create_main_card_editer_Modal = () => {
 
     Btn_box_btn_next.addEventListener('click', () => {
         img_croping_area.classList.add("hide")
+        let Img_Height = cropper.canvas.children[0].style.height
+        let Img_width = cropper.canvas.children[0].style.width
+        let New_img = document.createElement("img")
+        New_img.style.width = "100% !important"
+        New_img.style.height = "100% !important"
+        cropper.getCroppedCanvas().toBlob((blob) => {
+            cropper_blob.push(blob)
+            img_preview.children[0].remove()
+            New_img.src = URL.createObjectURL(blob);
+            img_preview.append(New_img)
+            New_img.style.width = "100% "
+            New_img.style.height = "100%"
+            
+        })
+        console.log(cropper_blob)
+        window.addEventListener('resize', ()=>{
+            
+            // .setAttribute('style', 'display:inline !important');
+            New_img.setAttribute('style', `height:${"100%"} !important`)
+            New_img.setAttribute('style', `width:${"100%"} !important`)
+
+            // cropper.canvas.children[0].style.setProperty ("width" , Img_width , "important")
+            // cropper.canvas.children[0].style.setProperty ("width" , Img_Height ,  "improtant")
+        }, false);
         Card_data.classList.remove("hide")
     })
     Btn_box_btn_back.addEventListener('click', () => {
@@ -234,9 +259,10 @@ const Create_main_card_editer_Modal = () => {
     Card_data_next.addEventListener('click', () => {
         main_card_editer_Modal.classList.add("hide")
         document.querySelector('.modal_bg_on').classList.add('hide')
-        cropper.getCroppedCanvas().toBlob((blob) => {
-            let im = new File([blob], "image", { type: blob.type })
-
+        console.log(cropper.getCroppedCanvas().width)
+            let im = new File([cropper_blob[0]], `image.${cropper_blob[0].type.split('/')[1]}`, { type: cropper_blob[0].type })
+            
+            console.log(im)
             let Ref = dbRef(db, "Products/")
             onValue(Ref, (snap) => {
                 let data = Object.values(snap.val())
@@ -245,9 +271,8 @@ const Create_main_card_editer_Modal = () => {
                 }
             })
             let ID_no = Math.max(...MAX_id_no) + 1;
+            console.log(im, All_Images_For_Card, Card_Title, Card_Description, Card_discounted_price, Product_price, Card_tag_data, ID_no)
             Card_created(im, All_Images_For_Card, Card_Title, Card_Description, Card_discounted_price, Product_price, Card_tag_data, ID_no)
-
-        })
     })
     Drop_box.addEventListener("dragenter", e => {
         e.preventDefault()
@@ -324,8 +349,12 @@ let Card_created = async (forntIMG, AllImg, Card_title, description, discount, p
 
     let uploadfile = (file) => {
         return new Promise((resolve, reject) => {
+            console.log(file)
+            console.log(file.name)
             let extension = file.name.split('.')[1]
+            console.log(extension)
             let name = file.name.split('.')[0]
+            console.log(name)
             const storageRef = StoreRef(Storage, `images/${name}->${new_key}.${extension}`);
             const uploadTask = uploadBytesResumable(storageRef, file);
             uploadTask.on(
