@@ -329,7 +329,10 @@ object-position: center ;
 }
 @media screen and (width < 600px){
   body{
-    font-size: 0.8rem;
+    font-size: 0.6rem;
+  }
+  body button {
+    font-size: 10px !important;
   }
 }
 @media screen and (width < 300px){

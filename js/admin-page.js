@@ -194,7 +194,7 @@ const Edit_card_function = (one_card, main_data) => {
     console.log(Number(one_card.Card_Discounted_price.split(":")[1]))
     modal.innerHTML = ''
     modal.innerHTML = `
-    <div class="d-flex row justify-content-between align-items-center p-3 w-100 "><h2 class="fw-bolder w-25 m-0">Card Edit</h2><span class="Modal_close_btn  fs-1 px-2"  style="width: fit-content;">&#215;</span></div>
+    <div class="d-flex row justify-content-between mx-3 w-100 my-2"><h2 class="fw-bolder text-nowrap w-25 m-0">Card Edit</h2><span class="Modal_close_btn  fs-1 px-2"  style="width: fit-content;">&#215;</span></div>
         <div class=" row w-100 m-0 h-100 d-flex justify-content-center align-items-center">
         <div class="col-md-6 col-sm-12  Card_Edit_container h-100 d-flex  justify-content-center align-items-center ">
 
@@ -415,8 +415,15 @@ let Compeleted_order_btn = document.querySelector('.Compeleted_order_btn')
 
 let order_ref = dbRef(db, "Order/")
 onValue(order_ref, (snap) => {
-    let order_data = Object.values(snap.val())
-    creating_order_data_deshborad(order_data)
+    if(snap.exists()){
+        let order_data = Object.values(snap.val())
+        creating_order_data_deshborad(order_data)
+    }else{
+        new Notification("No Order",{
+            body : "No Orders on this Time",
+            icon: "../images/kapraCollectionLogo.png"
+        } )
+    }
 })
 
 const creating_order_data_deshborad = (data) => {
@@ -499,7 +506,7 @@ const creating_order_data_deshborad = (data) => {
 window.Render_completed_orders = (modal) => {
     let completeRef = dbRef(db, "Completed_orders/")
     onValue(completeRef, (snap) => {
-        let data = Object.values(snap.val())
+        if(snap.exists()){let data = Object.values(snap.val())
         modal.innerHTML = `<h2 class="my-2">Completed Orders</h2>`
         // let OrderedCARD;
         for (let i = 0; i < data.length; i++) {
@@ -515,6 +522,8 @@ window.Render_completed_orders = (modal) => {
                 <li class="marker p-2"> <strong>Product :</strong>  ${OrderedCARD[j].Product} <strong> Price :</strong> ${OrderedCARD[j].price} X${OrderedCARD[j].quantity}</li>
              `}
             modal.append(ul)
+        }}else{
+            alert("No Order Compeleted")
         }
     })
 }

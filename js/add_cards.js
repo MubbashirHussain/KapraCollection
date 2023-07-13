@@ -9,7 +9,7 @@ const Create_main_card_editer_Modal = () => {
     let main_card_editer_Modal = document.createElement('div')
     main_card_editer_Modal.className = "main_card_editer container m-0 p-0 w-100 h-100"
     main_card_editer_Modal.innerHTML = `
-    <div class="d-flex row justify-content-between align-items-center p-3"><h2 class="fw-bolder w-25 m-0">Card Edit</h2><span class="Modal_close_btn  fs-1 px-2"  style="width: fit-content;">&#215;</span></div>
+    <div class="d-flex row justify-content-between mx-3 w-100 my-2"><h2 class="fw-bolder text-nowrap w-25 m-0">Card Edit</h2><span class="Modal_close_btn  fs-1 px-2"  style="width: fit-content;">&#215;</span></div>
     <div class=" row w-100 m-0 h-100 d-flex justify-content-center align-items-center">
     <div class="col-md-6 col-sm-12  Card_Edit_container h-100 d-flex  justify-content-center align-items-center ">
         
